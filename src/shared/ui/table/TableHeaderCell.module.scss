@@ -1,0 +1,20 @@
+.tableHeaderCell {
+  display: flex;
+  align-items: center;
+  padding: 12px 8px;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.active {
+  background: var(--shade)
+}
+
+.icon {
+  fill: var(--white);
+  margin-left: 4px;
+}
+
+.iconReversed {
+  transform: rotate(180deg);
+}

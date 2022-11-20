@@ -6,7 +6,6 @@
 .searchRow {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
 }
 
 .search {
@@ -40,4 +39,8 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.filtersRow {
+  margin-top: 16px;
 }

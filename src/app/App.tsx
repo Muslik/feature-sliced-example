@@ -3,11 +3,7 @@ import { Pages } from "src/pages";
 
 function App() {
   useThemeSwitcher();
-  return (
-    <div>
-      <Pages />
-    </div>
-  );
+  return <Pages />;
 }
 
 export default App;

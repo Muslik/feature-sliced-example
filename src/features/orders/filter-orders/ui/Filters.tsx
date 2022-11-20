@@ -1,5 +1,5 @@
 import { useUnit } from "effector-react";
-import { useState } from "react";
+import { STATUSES_MAP } from "src/entities/orders";
 import { Button, Input, Select } from "src/shared/ui";
 import {
   $dateFrom,
@@ -16,14 +16,10 @@ import {
 } from "../model";
 import styles from "./Filters.module.scss";
 
-const STATUSES = [
-  { label: "Новый", value: "new" },
-  { label: "Расчет", value: "calculation" },
-  { label: "Подтвержден", value: "confirmed" },
-  { label: "Отложен", value: "postponed" },
-  { label: "Выполнен", value: "completed" },
-  { label: "Отменен", value: "canceled" },
-];
+const STATUSES = Object.keys(STATUSES_MAP).map(status => ({
+  value: status,
+  label: STATUSES_MAP[status],
+}))
 
 export const Filters = () => {
   const units = useUnit({

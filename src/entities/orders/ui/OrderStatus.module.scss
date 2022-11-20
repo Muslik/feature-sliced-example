@@ -1,0 +1,40 @@
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 4px;
+}
+
+.completed {
+  color: var(--green);
+}
+
+.completed .icon {
+  fill: var(--green);
+  stroke: var(--green);
+}
+
+.declined {
+  color: var(--black);
+  .icon {
+    stroke: var(--black);
+  }
+}
+
+
+.postponed,
+.new {
+  .icon {
+    fill: var(--orange);
+  }
+}
+
+.calculation .icon {
+  fill: var(--blue);
+}
+
+.confirmed .icon {
+  fill: var(--green);
+}

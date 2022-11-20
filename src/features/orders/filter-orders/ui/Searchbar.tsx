@@ -1,7 +1,7 @@
 import { useUnit } from "effector-react";
 import cls from "classnames";
 import { Button, Icon, Input } from "src/shared/ui";
-import { $orders, fetchOrdersFx } from "src/entities/orders/model";
+import { fetchOrdersFx } from "src/entities/orders";
 import { Filters } from "./Filters";
 import {
   $isFiltersFilled,
@@ -13,9 +13,9 @@ import {
 } from "../model";
 import styles from "./Searchbar.module.scss";
 
-type Props = {};
+type Props = { className?: string };
 
-export const Searchbar = ({ }: Props) => {
+export const Searchbar = ({ className }: Props) => {
   const [
     search,
     searchChangedFn,
@@ -33,7 +33,7 @@ export const Searchbar = ({ }: Props) => {
   ]);
 
   return (
-    <div className={styles.searchbar}>
+    <div className={cls(styles.searchbar, className)}>
       <div className={styles.searchRow}>
         <Input
           value={search}

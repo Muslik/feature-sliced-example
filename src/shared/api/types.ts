@@ -4,11 +4,13 @@ type OrderEntitiy = {
   price: number;
 }
 
+type Status = "new" | "calculation" | "confirmed" | "postponed" | "completed" | "declined"
+
 export type Order = {
     id: string,
     customer: string,
     date: string,
-    status: string,
+    status: Status,
     amount: number,
     orderNumber:  string,
     sum: number,

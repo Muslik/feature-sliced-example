@@ -8,3 +8,4 @@ export { LabelControl } from './labelControl/LabelControl';
 export { Dropdown } from './dropdown/Dropdown';
 export { Select } from './select/Select';
 export { Modal } from './modal/Modal';
+export * from './table';

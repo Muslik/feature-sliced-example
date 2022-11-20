@@ -22,6 +22,7 @@ body {
   --white: #fff;
   --light-blue: #BAD8F5;
   --white-blue: #EBF0F5;
+  --shade: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
@@ -29,4 +30,5 @@ body {
   --white: #2B2D33;
   --light-blue: #454E52;
   --white-blue: #171B1F;
+  --shade: rgba(0, 0, 0, 0.3);
 }
