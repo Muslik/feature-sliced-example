@@ -34,10 +34,13 @@ export const Pagination = () => {
 
   return (
     <div className={styles.pages}>
-      {paginationRange.map((page) => {
-        if (page === null) {
+      {paginationRange.map((page, index) => {
+        if (typeof page === "string") {
           return (
-            <div key={page} className={cls(styles.pageItem, styles.dots)}>
+            <div
+              className={cls(styles.pageItem, styles.dots)}
+              key={page + index}
+            >
               &#8230;
             </div>
           );

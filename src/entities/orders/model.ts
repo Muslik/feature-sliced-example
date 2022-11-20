@@ -72,8 +72,7 @@ export const $filteredOrders = combine(
   $orders,
   $filtersQuery,
   $sortQuery,
-  $paginationQuery,
-  (orders, query, sortQuery, paginationQuery) => {
+  (orders, query, sortQuery) => {
     const filtered = orders.filter((order) => {
       const searchFilter =
         isIncludeString(order.customer, query.search) ||
