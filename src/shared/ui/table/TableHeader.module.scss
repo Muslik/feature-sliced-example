@@ -1,6 +1,8 @@
 @import 'src/shared/styles/mixins';
+
 .tableHeader {
   display: flex;
   background: var(--blue);
   color: var(--white);
+  padding: 0 8px;
 }
