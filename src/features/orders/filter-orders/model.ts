@@ -1,7 +1,7 @@
 import { createForm } from "effector-forms";
 import { debounce } from "patronum";
 import { createEvent, createStore, sample } from "effector";
-import { setQuery } from "src/entities/orders";
+import { setFiltersQuery } from "src/entities/orders";
 
 const DEBOUNCE_TIME = 300;
 
@@ -19,7 +19,7 @@ const debouncedSearchChanged = debounce({
 sample({
   source: debouncedSearchChanged,
   fn: (search) => ({ search }),
-  target: setQuery,
+  target: setFiltersQuery,
 });
 
 export const filtersForm = createForm({
@@ -46,7 +46,7 @@ sample({
   source: filtersForm.$values,
   clock: [filtersForm.reset, filtersForm.submit],
   fn: (form) => form,
-  target: setQuery,
+  target: setFiltersQuery,
 });
 
 export const $isFiltersVisible = createStore(false).reset(filtersForm.reset);

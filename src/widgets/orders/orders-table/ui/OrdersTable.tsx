@@ -1,12 +1,13 @@
 import { useUnit } from "effector-react";
 import {
-  $filteredOrders,
-  $sortParams,
+  $paginatedOrders,
+  $sortQuery,
   OrderStatus,
   SortField,
 } from "src/entities/orders";
 import { orderEdited } from "src/features/orders/edit-order";
 import { sortApplied } from "src/features/orders/sort-orders";
+import { Pagination } from "src/features/orders/paginate-orders";
 import { formatDate, formatMoney } from "src/shared/lib";
 import {
   Button,
@@ -29,12 +30,15 @@ const INVERTED_SORT_DIRECTION = {
 } as const;
 
 export const OrdersTable = ({ }: Props) => {
-  const model = useUnit({ orders: $filteredOrders, sortParams: $sortParams });
+  const model = useUnit({
+    orders: $paginatedOrders,
+    sortQuery: $sortQuery,
+  });
 
   const handleSort = (field: SortField) => {
     const direction =
-      model.sortParams.field === field
-        ? INVERTED_SORT_DIRECTION[model.sortParams.direction]
+      model.sortQuery.field === field
+        ? INVERTED_SORT_DIRECTION[model.sortQuery.direction]
         : "desc";
     sortApplied({ field, direction });
   };
@@ -44,10 +48,10 @@ export const OrdersTable = ({ }: Props) => {
       <TableHeader>
         <TableHeaderCell className={styles.cellOrderNumber}>#</TableHeaderCell>
         <TableHeaderCell
-          isActive={model.sortParams.field === "date"}
+          isActive={model.sortQuery.field === "date"}
           direction={
-            model.sortParams.field === "date"
-              ? model.sortParams.direction
+            model.sortQuery.field === "date"
+              ? model.sortQuery.direction
               : "desc"
           }
           onSort={() => handleSort("date")}
@@ -56,10 +60,10 @@ export const OrdersTable = ({ }: Props) => {
           Дата
         </TableHeaderCell>
         <TableHeaderCell
-          isActive={model.sortParams.field === "status"}
+          isActive={model.sortQuery.field === "status"}
           direction={
-            model.sortParams.field === "status"
-              ? model.sortParams.direction
+            model.sortQuery.field === "status"
+              ? model.sortQuery.direction
               : "desc"
           }
           onSort={() => handleSort("status")}
@@ -68,10 +72,10 @@ export const OrdersTable = ({ }: Props) => {
           Статус
         </TableHeaderCell>
         <TableHeaderCell
-          isActive={model.sortParams.field === "amount"}
+          isActive={model.sortQuery.field === "amount"}
           direction={
-            model.sortParams.field === "amount"
-              ? model.sortParams.direction
+            model.sortQuery.field === "amount"
+              ? model.sortQuery.direction
               : "desc"
           }
           onSort={() => handleSort("amount")}
@@ -80,11 +84,9 @@ export const OrdersTable = ({ }: Props) => {
           Позиций
         </TableHeaderCell>
         <TableHeaderCell
-          isActive={model.sortParams.field === "sum"}
+          isActive={model.sortQuery.field === "sum"}
           direction={
-            model.sortParams.field === "sum"
-              ? model.sortParams.direction
-              : "desc"
+            model.sortQuery.field === "sum" ? model.sortQuery.direction : "desc"
           }
           onSort={() => handleSort("sum")}
           className={styles.cellSum}
@@ -117,8 +119,9 @@ export const OrdersTable = ({ }: Props) => {
           )
         )}
       </TableBody>
-      <TableFooter>
-        <Button theme="danger">Delete</Button>
+      <TableFooter className={styles.footer}>
+        <Button size="small" theme="danger">Delete</Button>
+        <Pagination />
       </TableFooter>
     </Table>
   );

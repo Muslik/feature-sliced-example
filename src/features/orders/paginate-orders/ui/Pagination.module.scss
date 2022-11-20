@@ -1,0 +1,15 @@
+.pages {
+  display: flex;
+}
+
+.dots {
+  color: var(--blue);
+}
+
+.pageItem + .pageItem {
+  margin-left: 4px;
+}
+
+.dropdown {
+  right: 0;
+}

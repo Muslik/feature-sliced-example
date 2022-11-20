@@ -15,3 +15,8 @@ export type SortParams = {
   field: SortField;
   direction: SortDirection;
 }
+
+export type PaginationParams = {
+  page: number;
+  limit: number;
+}

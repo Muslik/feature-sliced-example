@@ -1,14 +1,11 @@
 import { combine, createEffect, createEvent, createStore } from "effector";
 import { api, Order } from "src/shared/api";
 import { parseInputToDate, parseDate } from "src/shared/lib";
+import { SORT_COMPARATORS } from "./lib";
 
-import { Query, SortDirection, SortField, SortParams } from "./types";
+import { PaginationParams, Query, SortParams } from "./types";
 
 export const fetchOrdersFx = createEffect(api.fetchOrders);
-
-fetchOrdersFx.doneData.watch((f) => {
-  console.log("fetchOrdersFx", f);
-});
 
 export const $orders = createStore<Order[]>([]);
 
@@ -25,7 +22,7 @@ $orders
     });
   });
 
-const $query = createStore<Query>({
+const $filtersQuery = createStore<Query>({
   search: "",
   dateFrom: "",
   dateTo: "",
@@ -39,13 +36,25 @@ export const $sortQuery = createStore<SortParams>({
   direction: "desc",
 });
 
+export const $paginationQuery = createStore<PaginationParams>({
+  page: 1,
+  limit: 50,
+});
+
+export const setPaginationQuery = createEvent<Partial<PaginationParams>>();
+
+$paginationQuery.on(setPaginationQuery, (state, payload) => ({
+  ...state,
+  ...payload,
+}));
+
 export const sortQueryApplied = createEvent<SortParams>();
 
 $sortQuery.on(sortQueryApplied, (_, payload) => payload);
 
-export const setQuery = createEvent<Partial<Query>>();
+export const setFiltersQuery = createEvent<Partial<Query>>();
 
-$query.on(setQuery, (state, query) => ({ ...state, ...query }));
+$filtersQuery.on(setFiltersQuery, (state, query) => ({ ...state, ...query }));
 
 const isInRange = (min: number, max: number) => (value: number) => {
   const minValue = min || -Infinity;
@@ -59,39 +68,12 @@ const isIncludeString = (str: string, search: string) => {
   return str.toLowerCase().includes(search.toLowerCase());
 };
 
-const SORT_COMPARATORS: Record<
-  SortField,
-  (a: Order, b: Order, direction: SortDirection) => number
-> = {
-  date: (a, b, direction) => {
-    const dateA = parseDate(a.date);
-    const dateB = parseDate(b.date);
-    return direction === "asc" ? dateA - dateB : dateB - dateA;
-  },
-  sum: (a, b, direction) => {
-    const priceA = a.sum;
-    const priceB = b.sum;
-    return direction === "asc" ? priceA - priceB : priceB - priceA;
-  },
-  status: (a, b, direction) => {
-    const statusA = a.status;
-    const statusB = b.status;
-    return direction === "asc"
-      ? statusA.localeCompare(statusB)
-      : statusB.localeCompare(statusA);
-  },
-  amount: (a, b, direction) => {
-    const amountA = a.amount;
-    const amountB = b.amount;
-    return direction === "asc" ? amountA - amountB : amountB - amountA;
-  },
-};
-
 export const $filteredOrders = combine(
   $orders,
-  $query,
+  $filtersQuery,
   $sortQuery,
-  (orders, query, sortQuery) => {
+  $paginationQuery,
+  (orders, query, sortQuery, paginationQuery) => {
     const filtered = orders.filter((order) => {
       const searchFilter =
         isIncludeString(order.customer, query.search) ||
@@ -121,8 +103,13 @@ export const $filteredOrders = combine(
       return comparator(a, b, sortQuery.direction);
     });
 
-    console.log("QUERY", query, filtered);
     return sorted;
   }
 );
 
+export const $paginatedOrders = combine($filteredOrders, $paginationQuery, (orders, paginationQuery) => {
+  const firstPageIndex = (paginationQuery.page - 1) * paginationQuery.limit;
+  const lastPageIndex = firstPageIndex + paginationQuery.limit;
+
+  return orders.slice(firstPageIndex, lastPageIndex);
+});
