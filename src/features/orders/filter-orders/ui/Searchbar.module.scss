@@ -1,0 +1,43 @@
+.searchbar {
+  display: flex;
+  flex-direction:  column;
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search {
+  width: 320px;
+  margin-right: 16px;
+}
+
+.button + .button {
+  margin-left: 16px;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  padding: 16px 8px;
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--blue);
+  margin-left: auto;
+}
+
+.loadingIcon {
+  animation: rotate 1s infinite;
+  margin-right: 8px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
