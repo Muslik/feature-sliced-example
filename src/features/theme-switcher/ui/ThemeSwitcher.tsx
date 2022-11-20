@@ -1,7 +1,5 @@
-import { Dropdown, Button } from "src/shared/ui";
+import { Dropdown, Button, DropdownItem } from "src/shared/ui";
 import { useThemeSwitcher } from "../lib";
-
-import styles from "./ThemeSwitcher.module.scss";
 
 const THEME_MAPPING = {
   dark: "Темная тема",
@@ -25,26 +23,28 @@ export const ThemeSwitcher = () => {
       }
       overlay={
         <>
-          <div className={styles.dropdownItem}>Выберите тему</div>
-          <Button
-            icon="sun"
-            size="small"
-            withFullWidth={true}
-            theme="blueReverse"
-            className={styles.dropdownItem}
-            onClick={() => setTheme("light")}
-          >
-            Светлая
-          </Button>
-          <Button
-            size="small"
-            icon="moon"
-            withFullWidth={true}
-            className={styles.dropdownItem}
-            onClick={() => setTheme("dark")}
-          >
-            Темная
-          </Button>
+          <DropdownItem>Выберите тему</DropdownItem>
+          <DropdownItem>
+            <Button
+              icon="sun"
+              size="small"
+              withFullWidth={true}
+              theme="blueReverse"
+              onClick={() => setTheme("light")}
+            >
+              Светлая
+            </Button>
+          </DropdownItem>
+          <DropdownItem>
+            <Button
+              size="small"
+              icon="moon"
+              withFullWidth={true}
+              onClick={() => setTheme("dark")}
+            >
+              Темная
+            </Button>
+          </DropdownItem>
         </>
       }
     />

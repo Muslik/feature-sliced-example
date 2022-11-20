@@ -96,13 +96,14 @@ export const Select = ({
   const renderedOptions = multiple ? getMultipleOptions() : getOptions();
 
   return (
-    <div className={cls(styles.select, className)}>
+    <div>
       <Dropdown
         trigger={
           <Input
             postfix={<Icon name="varrow" fill="var(--light-blue)" />}
             readOnly
             value={getDescription()}
+            className={cls(className)}
           />
         }
         overlay={<>{renderedOptions}</>}

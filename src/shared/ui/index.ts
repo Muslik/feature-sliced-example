@@ -5,7 +5,7 @@ export { Checkbox } from './checkbox/Checkbox';
 export { Radio } from './radio/Radio';
 export { Input } from './input/Input';
 export { LabelControl } from './labelControl/LabelControl';
-export { Dropdown } from './dropdown/Dropdown';
+export { Dropdown, DropdownItem } from './dropdown';
 export { Select } from './select/Select';
 export { Modal } from './modal/Modal';
 export * from './table';

@@ -1,20 +1,11 @@
 import { createForm } from "effector-forms";
-import { combine, createEvent, createStore, sample } from "effector";
+import { combine, createEvent, sample } from "effector";
 import { $orders, orderChanged } from "src/entities/orders";
+import { Order } from "src/shared/api";
 
 const VALID_CONFIRMATION_CODE = "123";
 
-export const $editingOrderId = createStore<string | null>(null);
-
 export const orderEdited = createEvent<string>();
-export const orderEditFinished = createEvent();
-
-$editingOrderId.on(orderEdited, (_, id) => id).reset(orderEditFinished);
-
-export const $orderEdit = combine($orders, $editingOrderId, (orders, id) => {
-  if (!id) return null;
-  return orders.find((order) => order.id === id);
-});
 
 export const orderForm = createForm({
   validateOn: ["submit"],
@@ -66,14 +57,31 @@ export const orderForm = createForm({
 });
 
 sample({
-  source: $orderEdit,
+  clock: orderEdited,
+  fn: (id) => ({ id }),
+  target: orderForm.setForm,
+});
+
+export const $orderToEdit = combine(
+  $orders,
+  orderForm.$values,
+  (orders, { id }) => {
+    if (!id) {
+      return null;
+    }
+    return orders.find((order) => order.id === id) ?? null;
+  }
+);
+
+sample({
+  source: $orderToEdit,
   filter: Boolean,
-  fn: (order) => ({
-    id: order.id,
-    date: order.date,
-    customer: order.customer,
-    loyality: order.loyality,
-    status: order.status,
+  fn: (orderToEdit) => ({
+    id: orderToEdit?.id,
+    date: orderToEdit?.date,
+    customer: orderToEdit?.customer,
+    loyality: orderToEdit?.loyality,
+    status: orderToEdit?.status,
   }),
   target: orderForm.setForm,
 });
@@ -81,5 +89,28 @@ sample({
 sample({
   clock: orderForm.formValidated,
   fn: ({ confirmationCode, ...rest }) => rest,
-  target: [orderChanged, orderEditFinished],
+  target: orderChanged,
 });
+
+sample({
+  clock: orderChanged,
+  target: orderForm.reset,
+});
+
+export const $hasUnsavedChanges = combine(
+  $orderToEdit,
+  orderForm.$values,
+  (orderToEdit, { confirmationCode, ...values }) => {
+    if (!orderToEdit) {
+      return false;
+    }
+
+    return Object.keys(values).some(
+      (key) =>
+        orderToEdit[key as keyof Order] !==
+        values[
+          key as Exclude<keyof typeof orderForm.fields, "confirmationCode">
+        ]
+    );
+  }
+);
