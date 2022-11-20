@@ -5,6 +5,7 @@ import {
   OrderStatus,
   SortField,
 } from "src/entities/orders";
+import { orderEdited } from "src/features/orders/edit-order";
 import { sortApplied } from "src/features/orders/sort-orders";
 import { formatDate, formatMoney } from "src/shared/lib";
 import {
@@ -97,7 +98,7 @@ export const OrdersTable = ({ }: Props) => {
       <TableBody>
         {model.orders.map(
           ({ id, orderNumber, date, status, amount, sum, customer }) => (
-            <TableRow key={id}>
+            <TableRow key={id} onClick={() => orderEdited(id)}>
               <TableCell className={styles.cellOrderNumber}>
                 {orderNumber}
               </TableCell>

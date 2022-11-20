@@ -9,7 +9,7 @@ type Props = {
   position?: "right" | "center";
 };
 
-export const Modal = ({ isOpen, fullHeight, position, children }: Props) => {
+export const Modal = ({ isOpen, fullHeight, position = "right", children }: Props) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";

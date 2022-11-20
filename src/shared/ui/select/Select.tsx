@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import cls from 'classnames';
 import { Icon, Input, Dropdown, LabelControl, Checkbox, Radio } from "../";
 
 import styles from "./Select.module.scss";
@@ -19,6 +20,7 @@ type Props = {
   name: string;
   onChange: (value: string) => void;
   options: { value: string; label: string }[];
+  className?: string;
 } & (Multiple | Single);
 
 export const Select = ({
@@ -27,6 +29,7 @@ export const Select = ({
   options,
   multiple,
   name,
+  className,
 }: Props) => {
   if (!options) {
     return null;
@@ -93,7 +96,7 @@ export const Select = ({
   const renderedOptions = multiple ? getMultipleOptions() : getOptions();
 
   return (
-    <div className={styles.select}>
+    <div className={cls(styles.select, className)}>
       <Dropdown
         trigger={
           <Input

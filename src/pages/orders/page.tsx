@@ -1,3 +1,4 @@
+import { EditOrderForm } from "src/features/orders/edit-order/ui/EditOrderForm";
 import { Searchbar } from "src/features/orders/filter-orders";
 import { ThemeSwitcher } from "src/features/theme-switcher";
 import { OrdersTable } from "src/widgets/orders/orders-table";
@@ -14,6 +15,7 @@ export const OrdersPage = () => {
         </div>
         <Searchbar className={styles.searchbar} />
         <OrdersTable />
+        <EditOrderForm />
       </div>
     </div>
   );

@@ -1,0 +1,1 @@
+export { orderEdited } from './model';

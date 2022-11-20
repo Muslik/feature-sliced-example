@@ -1,5 +1,6 @@
+import { createForm } from "effector-forms";
 import { debounce } from "patronum";
-import { combine, createEvent, createStore, sample } from "effector";
+import { createEvent, createStore, sample } from "effector";
 import { setQuery } from "src/entities/orders";
 
 const DEBOUNCE_TIME = 300;
@@ -21,72 +22,35 @@ sample({
   target: setQuery,
 });
 
-export const resetFilters = createEvent();
+export const filtersForm = createForm({
+  fields: {
+    dateFrom: {
+      init: "",
+    },
+    dateTo: {
+      init: "",
+    },
+    statuses: {
+      init: [] as string[],
+    },
+    priceFrom: {
+      init: "",
+    },
+    priceTo: {
+      init: "",
+    },
+  },
+});
 
-export const $isFiltersVisible = createStore(false).reset(resetFilters);
+sample({
+  source: filtersForm.$values,
+  clock: [filtersForm.reset, filtersForm.submit],
+  fn: (form) => form,
+  target: setQuery,
+});
+
+export const $isFiltersVisible = createStore(false).reset(filtersForm.reset);
 
 export const toggleFilters = createEvent();
 
 $isFiltersVisible.on(toggleFilters, (isFiltersVisible) => !isFiltersVisible);
-
-// Форма
-
-export const $dateFrom = createStore("").reset(resetFilters);
-
-export const dateFromChanged = createEvent<string>();
-
-$dateFrom.on(dateFromChanged, (_, dateFrom) => dateFrom);
-
-export const $dateTo = createStore("").reset(resetFilters);
-
-export const dateToChanged = createEvent<string>();
-
-$dateTo.on(dateToChanged, (_, dateFrom) => dateFrom);
-
-export const $statuses = createStore<string[]>([]).reset(resetFilters);
-
-export const statusesChanged = createEvent<string>();
-
-$statuses.on(statusesChanged, (state, status) =>
-  state.includes(status)
-    ? state.filter((s) => s !== status)
-    : [...state, status]
-);
-
-export const $priceFrom = createStore("").reset(resetFilters);
-
-export const priceFromChanged = createEvent<string>();
-
-$priceFrom.on(priceFromChanged, (_, priceFrom) => priceFrom);
-
-export const $priceTo = createStore("").reset(resetFilters);
-
-export const priceToChanged = createEvent<string>();
-
-$priceTo.on(priceToChanged, (_, priceTo) => priceTo);
-
-const $form = combine({
-  dateFrom: $dateFrom,
-  dateTo: $dateTo,
-  statuses: $statuses,
-  priceFrom: $priceFrom,
-  priceTo: $priceTo
-})
-
-export const filtersApplied = createEvent();
-
-sample({
-  source: $form,
-  clock: [resetFilters, filtersApplied],
-  fn: (form) => form,
-  target: setQuery,
-})
-
-export const $isFiltersFilled = $form.map((form) => {
-  return Object.values(form).some((value) => {
-    if (Array.isArray(value)) {
-      return value.length > 0;
-    }
-    return value !== "";
-  });
-})

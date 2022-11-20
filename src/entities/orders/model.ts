@@ -12,7 +12,18 @@ fetchOrdersFx.doneData.watch((f) => {
 
 export const $orders = createStore<Order[]>([]);
 
-$orders.on(fetchOrdersFx.doneData, (_, payload) => payload);
+export const orderChanged = createEvent<Partial<Order>>();
+
+$orders
+  .on(fetchOrdersFx.doneData, (_, payload) => payload)
+  .on(orderChanged, (state, payload) => {
+    return state.map((order) => {
+      if (order.id === payload.id) {
+        return { ...order, ...payload };
+      }
+      return order;
+    });
+  });
 
 const $query = createStore<Query>({
   search: "",
@@ -40,7 +51,7 @@ const isInRange = (min: number, max: number) => (value: number) => {
   const minValue = min || -Infinity;
   const maxValue = max || Infinity;
   return value >= minValue && value <= maxValue;
-}
+};
 
 const areAllThruthy = (arr: boolean[]) => arr.every(Boolean);
 
@@ -48,7 +59,10 @@ const isIncludeString = (str: string, search: string) => {
   return str.toLowerCase().includes(search.toLowerCase());
 };
 
-const SORT_COMPARATORS: Record<SortField, (a: Order, b: Order, direction: SortDirection) => number> = {
+const SORT_COMPARATORS: Record<
+  SortField,
+  (a: Order, b: Order, direction: SortDirection) => number
+> = {
   date: (a, b, direction) => {
     const dateA = parseDate(a.date);
     const dateB = parseDate(b.date);
@@ -62,37 +76,53 @@ const SORT_COMPARATORS: Record<SortField, (a: Order, b: Order, direction: SortDi
   status: (a, b, direction) => {
     const statusA = a.status;
     const statusB = b.status;
-    return direction === "asc" ? statusA.localeCompare(statusB) : statusB.localeCompare(statusA);
+    return direction === "asc"
+      ? statusA.localeCompare(statusB)
+      : statusB.localeCompare(statusA);
   },
   amount: (a, b, direction) => {
     const amountA = a.amount;
     const amountB = b.amount;
     return direction === "asc" ? amountA - amountB : amountB - amountA;
-  }
-}
+  },
+};
 
-export const $filteredOrders = combine($orders, $query, $sortQuery, (orders, query, sortQuery) => {
-  const filtered = orders.filter((order) => {
-    const searchFilter = isIncludeString(order.customer, query.search) || order.orderNumber.startsWith(query.search);
-    const dateFilter = isInRange(parseInputToDate(query.dateFrom), parseInputToDate(query.dateTo));
-    const priceFilter = isInRange(Number(query.priceFrom), Number(query.priceTo));
-    const statusFilter = query.statuses.length ? query.statuses.includes(order.status) : true;
+export const $filteredOrders = combine(
+  $orders,
+  $query,
+  $sortQuery,
+  (orders, query, sortQuery) => {
+    const filtered = orders.filter((order) => {
+      const searchFilter =
+        isIncludeString(order.customer, query.search) ||
+        order.orderNumber.startsWith(query.search);
+      const dateFilter = isInRange(
+        parseInputToDate(query.dateFrom),
+        parseInputToDate(query.dateTo)
+      );
+      const priceFilter = isInRange(
+        Number(query.priceFrom),
+        Number(query.priceTo)
+      );
+      const statusFilter = query.statuses.length
+        ? query.statuses.includes(order.status)
+        : true;
 
-    return (
-      areAllThruthy([
+      return areAllThruthy([
         searchFilter,
         dateFilter(parseDate(order.date)),
         priceFilter(order.sum),
         statusFilter,
-      ])
-    );
-  });
+      ]);
+    });
 
-  const sorted = filtered.sort((a, b) => {
-    const comparator = SORT_COMPARATORS[sortQuery.field];
-    return comparator(a, b, sortQuery.direction);
-  })
+    const sorted = filtered.sort((a, b) => {
+      const comparator = SORT_COMPARATORS[sortQuery.field];
+      return comparator(a, b, sortQuery.direction);
+    });
 
-  console.log("QUERY", query, filtered);
-  return sorted;
-});
+    console.log("QUERY", query, filtered);
+    return sorted;
+  }
+);
+

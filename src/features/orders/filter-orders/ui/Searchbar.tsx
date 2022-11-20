@@ -1,15 +1,15 @@
 import { useUnit } from "effector-react";
+import { useForm } from "effector-forms";
 import cls from "classnames";
 import { Button, Icon, Input } from "src/shared/ui";
 import { fetchOrdersFx } from "src/entities/orders";
 import { Filters } from "./Filters";
 import {
-  $isFiltersFilled,
   $isFiltersVisible,
   $search,
-  resetFilters,
   searchChanged,
   toggleFilters,
+  filtersForm,
 } from "../model";
 import styles from "./Searchbar.module.scss";
 
@@ -21,16 +21,16 @@ export const Searchbar = ({ className }: Props) => {
     searchChangedFn,
     isFiltersVisible,
     toggleFiltersFn,
-    isFiltersFilled,
     isOrdersLoading,
   ] = useUnit([
     $search,
     searchChanged,
     $isFiltersVisible,
     toggleFilters,
-    $isFiltersFilled,
     fetchOrdersFx.pending,
   ]);
+
+  const { isDirty, reset } = useForm(filtersForm);
 
   return (
     <div className={cls(styles.searchbar, className)}>
@@ -50,11 +50,11 @@ export const Searchbar = ({ className }: Props) => {
         >
           Фильтры
         </Button>
-        {isFiltersFilled && (
+        {isDirty && (
           <Button
             theme="blueReverse"
             className={styles.button}
-            onClick={() => resetFilters()}
+            onClick={() => reset()}
           >
             Сбросить фильтры
           </Button>

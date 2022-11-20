@@ -1,8 +1,13 @@
-import { ReactNode } from 'react';
-import styles from './TableRow.module.scss';
+import { ReactNode } from "react";
+import styles from "./TableRow.module.scss";
 
-type Props = { children: ReactNode };
+type Props = { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>;
 
-export const TableRow = ({ children }: Props) => {
-  return <div className={styles.tableRow}>{children}</div>
-}
+export const TableRow = ({ children, ...props }: Props) => {
+  return (
+    <div className={styles.tableRow} {...props}>
+      {children}
+    </div>
+  );
+};
+

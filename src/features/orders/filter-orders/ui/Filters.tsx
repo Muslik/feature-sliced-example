@@ -1,39 +1,25 @@
-import { useUnit } from "effector-react";
+import { useForm } from "effector-forms";
 import { STATUSES_MAP } from "src/entities/orders";
 import { Button, Input, Select } from "src/shared/ui";
-import {
-  $dateFrom,
-  $dateTo,
-  $priceFrom,
-  $priceTo,
-  $statuses,
-  dateFromChanged,
-  dateToChanged,
-  filtersApplied,
-  priceFromChanged,
-  priceToChanged,
-  statusesChanged,
-} from "../model";
+import { filtersForm } from "../model";
 import styles from "./Filters.module.scss";
 
-const STATUSES = Object.keys(STATUSES_MAP).map(status => ({
+const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
   value: status,
   label: STATUSES_MAP[status],
-}))
+}));
 
 export const Filters = () => {
-  const units = useUnit({
-    dateFrom: $dateFrom,
-    dateFromChanged,
-    dateTo: $dateTo,
-    dateToChanged,
-    statuses: $statuses,
-    statusesChanged,
-    priceFrom: $priceFrom,
-    priceFromChanged,
-    priceTo: $priceTo,
-    priceToChanged,
-  });
+  const { fields, submit } = useForm(filtersForm);
+
+  console.log("F", fields.statuses.value);
+
+  const handleChangeStatuses = (status: string) => {
+    const newStatuses = fields.statuses.value.includes(status)
+      ? fields.statuses.value.filter((s) => s !== status)
+      : [...fields.statuses.value, status];
+    fields.statuses.onChange(newStatuses);
+  };
 
   return (
     <div className={styles.filters}>
@@ -47,60 +33,58 @@ export const Filters = () => {
             prefix="с"
             id="dateFrom"
             allowClear={true}
-            value={units.dateFrom}
-            onChange={(e) => units.dateFromChanged(e.target.value)}
+            value={fields.dateFrom.value}
+            onChange={(e) => fields.dateFrom.onChange(e.target.value)}
             placeholder="dd.mm.yyyy"
           />
           <Input
             className={styles.dateInput}
             prefix="до"
             allowClear={true}
-            value={units.dateTo}
-            onChange={(e) => units.dateToChanged(e.target.value)}
+            value={fields.dateTo.value}
+            onChange={(e) => fields.dateTo.onChange(e.target.value)}
             placeholder="dd.mm.yyyy"
           />
         </div>
       </div>
       <div className={styles.formBlock}>
-        <label className={styles.label} htmlFor="dateFrom">
-          Статус заказа
-        </label>
+        <label className={styles.label}>Статус заказа</label>
         <div className={styles.row}>
           <Select
             name="status"
             options={STATUSES}
-            selected={units.statuses}
-            onChange={(status) => units.statusesChanged(status)}
+            selected={fields.statuses.value}
+            onChange={handleChangeStatuses}
             multiple={true}
           />
         </div>
       </div>
       <div className={styles.formBlock}>
-        <label className={styles.label} htmlFor="dateFrom">
+        <label className={styles.label} htmlFor="priceFrom">
           Сумма заказа
         </label>
         <div className={styles.row}>
           <Input
             className={styles.dateInput}
             prefix="от"
-            id="dateFrom"
+            id="priceFrom"
             allowClear={true}
-            value={units.priceFrom}
-            onChange={(e) => units.priceFromChanged(e.target.value)}
+            value={fields.priceFrom.value}
+            onChange={(e) => fields.priceFrom.onChange(e.target.value)}
             placeholder="₽"
           />
           <Input
             className={styles.dateInput}
             prefix="до"
             allowClear={true}
-            value={units.priceTo}
-            onChange={(e) => units.priceToChanged(e.target.value)}
+            value={fields.priceTo.value}
+            onChange={(e) => fields.priceTo.onChange(e.target.value)}
             placeholder="₽"
           />
         </div>
       </div>
       <div className={styles.formBlock}>
-        <Button theme="blueReverse" onClick={() => filtersApplied()}>
+        <Button theme="blueReverse" onClick={() => submit()}>
           Применить
         </Button>
       </div>

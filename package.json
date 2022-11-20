@@ -13,8 +13,8 @@
     "atomic-router-react": "^0.8.0",
     "classnames": "^2.3.2",
     "effector": "^22.4.0",
+    "effector-forms": "^0.0.24",
     "effector-react": "^22.3.4",
-    "eslint": "^8.28.0",
     "history": "^5.3.0",
     "lodash": "^4.17.21",
     "patronum": "^1.12.3",
@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "eslint": "^8.28.0",
     "@types/lodash": "^4.14.189",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.24",
