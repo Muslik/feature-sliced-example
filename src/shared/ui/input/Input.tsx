@@ -25,8 +25,6 @@ const composeEventHandlers = <T extends SyntheticEvent>(
   };
 };
 
-export default composeEventHandlers;
-
 type Props = {
   hasError?: boolean;
   postfix?: ReactNode;
@@ -70,7 +68,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       if (!onChange) {
         return;
       }
-      if (inputRef.current && event.type === "click") {
+      if (inputRef.current) {
         const currentTarget = inputRef.current.cloneNode(
           true
         ) as HTMLInputElement;
