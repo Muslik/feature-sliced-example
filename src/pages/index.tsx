@@ -1,5 +1,4 @@
 import { Route } from "atomic-router-react";
-import { useStore } from "effector-react";
 
 import { routes } from "src/shared/routes";
 import { OrdersPage } from "./orders";
