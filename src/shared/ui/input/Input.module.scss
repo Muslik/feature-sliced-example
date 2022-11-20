@@ -1,0 +1,80 @@
+.inputWrapper {
+  width: fit-content;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  padding: 8px 4px;
+  line-height: 16px;
+  font-size: 13px;
+  height: 32px;
+  box-sizing: border-box;
+  background: var(--white);
+  color: var(--black)
+}
+
+.input::placeholder {
+  color: var(--light-blue);
+}
+
+.withError {
+  border-color: var(--red);
+}
+
+.withPostfix {
+  padding-right: 32px;
+}
+
+.withPrefix {
+  padding-left: 32px;
+}
+
+.input:disabled {
+  color: var(--black);
+  background: var(--light-blue);
+}
+
+.iconDisabled {
+  fill: var(--black);
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.clearButton,
+.prefix,
+.postfix {
+  font-size: 13px;
+  pointer-events: none;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prefix {
+  color: var(--black);
+  left: 0;
+}
+
+.clearButton {
+  padding: 0;
+  border: none;
+  background: none;
+  height: 16px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.iconClear {
+  stroke: var(--light-blue);
+}

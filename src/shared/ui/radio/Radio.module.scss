@@ -1,0 +1,16 @@
+.radio {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--light-blue);
+  box-sizing: border-box;
+  border-radius: 50%;
+  appearance: none;
+  background-color: var(--white);
+}
+
+.radio:checked {
+  border-color: var(--blue);
+  background-image: url('src/shared/assets/dot.svg');
+  fill: var(--white);
+  background-color: var(--blue);
+}

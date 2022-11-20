@@ -1,0 +1,84 @@
+.button {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  inline-size: fit-content;
+  font-family: inherit;
+  line-height: 16px;
+}
+
+.text {
+  pointer-events: none;
+}
+
+.icon {
+  fill: var(--white);
+  stroke: var(--white);
+}
+
+.theme_blue {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.theme_blue .icon {
+  fill: var(--white);
+}
+
+.theme_blueReverse {
+  background: none;
+  color: var(--blue);
+}
+
+.theme_blueReverse .icon {
+  fill: var(--blue);
+}
+
+.theme_blackReverse {
+  background: none;
+  color: var(--black)
+}
+
+.theme_blackReverse .icon {
+  fill: var(--black);
+}
+
+.theme_danger {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+.them_danger .icon {
+  fill: var(--white);
+}
+
+.size_medium {
+  padding: 8px 16px;
+}
+
+.size_medium .icon + .text {
+  margin-left: 8px;
+}
+
+.size_medium.iconOnly {
+  padding: 8px;
+}
+
+.size_small {
+  padding: 4px 8px;
+}
+
+.size_small .icon + .text {
+  margin-left: 4px;
+}
+
+.size_small.iconOnly {
+  padding: 4px;
+}
+
+.withFullWidth {
+  width: 100%;
+  justify-content: center;
+}

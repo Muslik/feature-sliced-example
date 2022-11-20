@@ -1,0 +1,55 @@
+.box {
+  width: fit-content;
+  padding: 48px;
+  border: 1px dashed #8055FF;
+  border-radius: 4px;
+}
+
+.boxCheckbox {
+  padding: 24px;
+}
+
+.checkbox {
+  margin-right: 24px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.inputLabel {
+  display: block;
+  margin-bottom: 48px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.labelText {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.buttonColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-right: 48px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.buttonRow {
+  display: flex;
+  margin-bottom: 48px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.dropdownElement {
+  margin-bottom: 8px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,32 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background: var(--white);
+  color: var(--black);
+}
+
+#root {
+  height: 100%;
+}
+
+:root {
+  --blue: #459DF5;
+  --green: #0FB864;
+  --orange: #FF8C56;
+  --red: #F53152;
+  --black: #000;
+  --white: #fff;
+  --light-blue: #BAD8F5;
+  --white-blue: #EBF0F5;
+}
+
+[data-theme="dark"] {
+  --black: #BCC4CC;
+  --white: #2B2D33;
+  --light-blue: #454E52;
+  --white-blue: #171B1F;
+}
