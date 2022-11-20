@@ -15,11 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from "src/shared/ui";
+import { formatMoney } from "src/shared/lib";
 import { LOYALITY_MAP, STATUSES_MAP } from "src/entities/orders";
 import { $hasUnsavedChanges, $orderToEdit, orderForm } from "../model";
 
 import styles from "./EditOrderForm.module.scss";
-import { formatMoney } from "src/shared/lib";
 
 const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
   value: status,
