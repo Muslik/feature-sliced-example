@@ -7,7 +7,8 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
-  port: 8080,
+    host: '0.0.0.0',
+    port: 8080,
   },
   resolve:{
     alias:{

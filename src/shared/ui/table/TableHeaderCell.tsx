@@ -9,7 +9,7 @@ type Props = {
   onSort?: () => void;
   children: ReactNode;
   className?: string;
-};
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export const TableHeaderCell = ({
   isActive,
@@ -17,11 +17,13 @@ export const TableHeaderCell = ({
   onSort,
   children,
   className,
+  ...props
 }: Props) => {
   return (
     <div
       className={cls(styles.tableHeaderCell, { [styles.active]: isActive }, className)}
       onClick={onSort}
+      {...props}
     >
       {children}
       {onSort && (
