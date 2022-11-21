@@ -1,6 +1,4 @@
-import { Loyality, Status } from 'src/shared/api';
-
-export const STATUSES_MAP: Record<Status, string> = {
+export const STATUSES_MAP: Record<string, string> = {
   new: 'Новый',
   calculation: 'Расчет',
   confirmed: 'Подтвержден',
@@ -9,7 +7,7 @@ export const STATUSES_MAP: Record<Status, string> = {
   declined: 'Отменен',
 };
 
-export const LOYALITY_MAP: Record<Loyality, string> = {
+export const LOYALITY_MAP: Record<string, string> = {
   newbie: 'Новичок',
   amateur: 'Любитель',
   professional: 'Профессионал',

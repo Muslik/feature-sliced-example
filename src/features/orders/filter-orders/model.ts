@@ -45,7 +45,6 @@ export const filtersForm = createForm({
 sample({
   source: filtersForm.$values,
   clock: [filtersForm.reset, filtersForm.submit],
-  fn: (form) => form,
   target: setFiltersQuery,
 });
 

@@ -1,1 +1,1 @@
-export { orderEdited, orderForm, $orderToEdit } from './model';
+export { orderEdited, orderForm, $orderToEdit, $hasUnsavedChanges } from './model';
