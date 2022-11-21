@@ -1,6 +1,6 @@
-import { useUnit } from "effector-react";
+import { useUnit } from 'effector-react';
 import cls from 'classnames';
-import { useForm } from "effector-forms";
+import { useForm } from 'effector-forms';
 import {
   Button,
   Dropdown,
@@ -14,12 +14,12 @@ import {
   TableFooter,
   TableHeader,
   TableRow,
-} from "src/shared/ui";
-import { formatMoney } from "src/shared/lib";
-import { LOYALITY_MAP, STATUSES_MAP } from "src/entities/orders";
-import { $hasUnsavedChanges, $orderToEdit, orderForm } from "../model";
+} from 'src/shared/ui';
+import { formatMoney } from 'src/shared/lib';
+import { LOYALITY_MAP, STATUSES_MAP } from 'src/entities/orders';
+import { $hasUnsavedChanges, $orderToEdit, orderForm } from '../model';
 
-import styles from "./EditOrderForm.module.scss";
+import styles from './EditOrderForm.module.scss';
 
 const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
   value: status,
@@ -27,8 +27,7 @@ const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
 }));
 
 export const EditOrderForm = () => {
-  const { fields, submit, hasError, errorText, isValid, reset } =
-    useForm(orderForm);
+  const { fields, submit, hasError, errorText, isValid, reset } = useForm(orderForm);
   const model = useUnit({
     orderToEdit: $orderToEdit,
     hasUnsavedChanges: $hasUnsavedChanges,
@@ -38,10 +37,10 @@ export const EditOrderForm = () => {
     return null;
   }
   const firstError =
-    errorText("customer") ||
-    errorText("status") ||
-    errorText("loyality") ||
-    errorText("confirmationCode");
+    errorText('customer') ||
+    errorText('status') ||
+    errorText('loyality') ||
+    errorText('confirmationCode');
 
   const hasUnsavedChangedClose = () => {
     if (model.hasUnsavedChanges) {
@@ -80,9 +79,7 @@ export const EditOrderForm = () => {
     <Modal isOpen={true}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <div className={styles.title}>
-            Заявка #{model.orderToEdit.orderNumber}
-          </div>
+          <div className={styles.title}>Заявка #{model.orderToEdit.orderNumber}</div>
           {hasUnsavedChangedClose()}
         </div>
         <div className={styles.body}>
@@ -104,7 +101,7 @@ export const EditOrderForm = () => {
                 className={styles.input}
                 value={fields.customer.value}
                 onChange={(e) => fields.customer.onChange(e.target.value)}
-                hasError={hasError("customer")}
+                hasError={hasError('customer')}
               />
             </label>
           </div>
@@ -121,9 +118,7 @@ export const EditOrderForm = () => {
                     <TableCell className={cls(styles.cell, styles.vendorCodeCell)}>
                       {item.vendorCode}
                     </TableCell>
-                    <TableCell className={cls(styles.cell, styles.nameCell)}>
-                      {item.name}
-                    </TableCell>
+                    <TableCell className={cls(styles.cell, styles.nameCell)}>{item.name}</TableCell>
                     <TableCell className={cls(styles.cell, styles.priceCell)}>
                       {formatMoney(item.price)}
                     </TableCell>
@@ -166,10 +161,8 @@ export const EditOrderForm = () => {
               <Input
                 className={styles.input}
                 value={fields.confirmationCode.value}
-                onChange={(e) =>
-                  fields.confirmationCode.onChange(e.target.value)
-                }
-                hasError={hasError("confirmationCode")}
+                onChange={(e) => fields.confirmationCode.onChange(e.target.value)}
+                hasError={hasError('confirmationCode')}
                 allowClear={true}
               />
             </label>

@@ -12,7 +12,7 @@ export const useMergedRef = <T>(...refs: Ref<T>[]): RefCallback<T> => {
         }
       }
     },
-    [refs]
+    [refs],
   );
 };
 

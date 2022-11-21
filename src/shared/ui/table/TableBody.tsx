@@ -6,5 +6,5 @@ type Props = {
 };
 
 export const TableBody = ({ children }: Props) => {
-  return <div className={styles.tableBody}>{children}</div>
-}
+  return <div className={styles.tableBody}>{children}</div>;
+};

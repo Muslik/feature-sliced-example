@@ -1,28 +1,25 @@
-import { createEvent, sample } from "effector";
-import { createForm } from "effector-forms";
-import {
-  $filteredOrders,
-  setPaginationQuery,
-} from "src/entities/orders";
+import { createEvent, sample } from 'effector';
+import { createForm } from 'effector-forms';
+import { $filteredOrders, setPaginationQuery } from 'src/entities/orders';
 
 export const pageForm = createForm({
-  validateOn: ["submit"],
+  validateOn: ['submit'],
   fields: {
     page: {
-      init: "",
+      init: '',
       rules: [
         {
-          name: "invalidPage",
+          name: 'invalidPage',
           source: $filteredOrders,
           validator: (value, _, orders) => {
             const pageTo = Number(value);
             return pageTo > 0 && pageTo <= orders.length;
-          }
+          },
         },
       ],
     },
   },
-})
+});
 
 sample({
   clock: pageForm.formValidated,
@@ -37,4 +34,3 @@ sample({
   fn: (page) => ({ page }),
   target: setPaginationQuery,
 });
-

@@ -9,5 +9,5 @@ type Props = {
 };
 
 export const DropdownItem = ({ children, className }: Props) => {
-  return <div className={cls(styles.dropdownItem, className)}>{children}</div>
-}
+  return <div className={cls(styles.dropdownItem, className)}>{children}</div>;
+};

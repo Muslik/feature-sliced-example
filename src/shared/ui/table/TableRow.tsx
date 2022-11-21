@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import styles from "./TableRow.module.scss";
+import { ReactNode } from 'react';
+import styles from './TableRow.module.scss';
 
 type Props = { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>;
 
@@ -10,4 +10,3 @@ export const TableRow = ({ children, ...props }: Props) => {
     </div>
   );
 };
-

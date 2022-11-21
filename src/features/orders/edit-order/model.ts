@@ -1,54 +1,54 @@
-import { createForm } from "effector-forms";
-import { combine, createEvent, sample } from "effector";
-import { $orders, orderChanged } from "src/entities/orders";
-import { Order } from "src/shared/api";
+import { createForm } from 'effector-forms';
+import { combine, createEvent, sample } from 'effector';
+import { $orders, orderChanged } from 'src/entities/orders';
+import { Order } from 'src/shared/api';
 
-const VALID_CONFIRMATION_CODE = "123";
+const VALID_CONFIRMATION_CODE = '123';
 
 export const orderEdited = createEvent<string>();
 
 export const orderForm = createForm({
-  validateOn: ["submit"],
+  validateOn: ['submit'],
   fields: {
     id: {
-      init: "",
+      init: '',
     },
     date: {
-      init: "",
+      init: '',
     },
     customer: {
-      init: "",
+      init: '',
       rules: [
         {
-          name: "required",
+          name: 'required',
           validator: (value) => ({
             isValid: Boolean(value),
-            errorText: "Необходимо указать имя клиента",
+            errorText: 'Необходимо указать имя клиента',
           }),
         },
       ],
     },
     loyality: {
-      init: "",
+      init: '',
     },
     status: {
-      init: "",
+      init: '',
     },
     confirmationCode: {
-      init: "",
+      init: '',
       rules: [
         {
-          name: "required",
+          name: 'required',
           validator: (value) => ({
             isValid: Boolean(value),
-            errorText: "Необходимо указать код подтверждения",
+            errorText: 'Необходимо указать код подтверждения',
           }),
         },
         {
-          name: "invalidCode",
+          name: 'invalidCode',
           validator: (value) => ({
             isValid: value === VALID_CONFIRMATION_CODE,
-            errorText: "Неверный код подтверждения",
+            errorText: 'Неверный код подтверждения',
           }),
         },
       ],
@@ -62,16 +62,12 @@ sample({
   target: orderForm.setForm,
 });
 
-export const $orderToEdit = combine(
-  $orders,
-  orderForm.$values,
-  (orders, { id }) => {
-    if (!id) {
-      return null;
-    }
-    return orders.find((order) => order.id === id) ?? null;
+export const $orderToEdit = combine($orders, orderForm.$values, (orders, { id }) => {
+  if (!id) {
+    return null;
   }
-);
+  return orders.find((order) => order.id === id) ?? null;
+});
 
 sample({
   source: $orderToEdit,
@@ -108,9 +104,7 @@ export const $hasUnsavedChanges = combine(
     return Object.keys(values).some(
       (key) =>
         orderToEdit[key as keyof Order] !==
-        values[
-          key as Exclude<keyof typeof orderForm.fields, "confirmationCode">
-        ]
+        values[key as Exclude<keyof typeof orderForm.fields, 'confirmationCode'>],
     );
-  }
+  },
 );

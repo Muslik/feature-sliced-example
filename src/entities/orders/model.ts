@@ -1,9 +1,9 @@
-import { combine, createEffect, createEvent, createStore } from "effector";
-import { api, Order } from "src/shared/api";
-import { parseInputToDate, parseDate } from "src/shared/lib";
-import { SORT_COMPARATORS } from "./lib";
+import { combine, createEffect, createEvent, createStore } from 'effector';
+import { api, Order } from 'src/shared/api';
+import { parseInputToDate, parseDate } from 'src/shared/lib';
+import { SORT_COMPARATORS } from './lib';
 
-import { PaginationParams, Query, SortParams } from "./types";
+import { PaginationParams, Query, SortParams } from './types';
 
 export const fetchOrdersFx = createEffect(api.fetchOrders);
 
@@ -23,17 +23,17 @@ $orders
   });
 
 const $filtersQuery = createStore<Query>({
-  search: "",
-  dateFrom: "",
-  dateTo: "",
+  search: '',
+  dateFrom: '',
+  dateTo: '',
   statuses: [],
-  priceFrom: "",
-  priceTo: "",
+  priceFrom: '',
+  priceTo: '',
 });
 
 export const $sortQuery = createStore<SortParams>({
-  field: "date",
-  direction: "desc",
+  field: 'date',
+  direction: 'desc',
 });
 
 export const $paginationQuery = createStore<PaginationParams>({
@@ -75,19 +75,13 @@ export const $filteredOrders = combine(
   (orders, query, sortQuery) => {
     const filtered = orders.filter((order) => {
       const searchFilter =
-        isIncludeString(order.customer, query.search) ||
-        order.orderNumber.startsWith(query.search);
+        isIncludeString(order.customer, query.search) || order.orderNumber.startsWith(query.search);
       const dateFilter = isInRange(
         parseInputToDate(query.dateFrom),
-        parseInputToDate(query.dateTo)
+        parseInputToDate(query.dateTo),
       );
-      const priceFilter = isInRange(
-        Number(query.priceFrom),
-        Number(query.priceTo)
-      );
-      const statusFilter = query.statuses.length
-        ? query.statuses.includes(order.status)
-        : true;
+      const priceFilter = isInRange(Number(query.priceFrom), Number(query.priceTo));
+      const statusFilter = query.statuses.length ? query.statuses.includes(order.status) : true;
 
       return areAllThruthy([
         searchFilter,
@@ -103,12 +97,16 @@ export const $filteredOrders = combine(
     });
 
     return sorted;
-  }
+  },
 );
 
-export const $paginatedOrders = combine($filteredOrders, $paginationQuery, (orders, paginationQuery) => {
-  const firstPageIndex = (paginationQuery.page - 1) * paginationQuery.limit;
-  const lastPageIndex = firstPageIndex + paginationQuery.limit;
+export const $paginatedOrders = combine(
+  $filteredOrders,
+  $paginationQuery,
+  (orders, paginationQuery) => {
+    const firstPageIndex = (paginationQuery.page - 1) * paginationQuery.limit;
+    const lastPageIndex = firstPageIndex + paginationQuery.limit;
 
-  return orders.slice(firstPageIndex, lastPageIndex);
-});
+    return orders.slice(firstPageIndex, lastPageIndex);
+  },
+);

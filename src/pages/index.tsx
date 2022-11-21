@@ -1,8 +1,8 @@
-import { Route } from "atomic-router-react";
+import { Route } from 'atomic-router-react';
 
-import { routes } from "src/shared/routes";
-import { OrdersPage } from "./orders";
-import { UiKitPage } from "./ui-kit";
+import { routes } from 'src/shared/routes';
+import { OrdersPage } from './orders';
+import { UiKitPage } from './ui-kit';
 
 export const Pages = () => (
   <>
@@ -12,7 +12,6 @@ export const Pages = () => (
 );
 
 export const routesMap = [
-  { path: "/ui-kit", route: routes.uiKit },
-  { path: "/", route: routes.orders },
+  { path: '/ui-kit', route: routes.uiKit },
+  { path: '/', route: routes.orders },
 ];
-

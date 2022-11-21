@@ -1,13 +1,13 @@
-import { useUnit } from "effector-react";
-import { useForm } from "effector-forms";
-import cls from "classnames";
-import { $filteredOrders, $paginationQuery } from "src/entities/orders";
-import { Button, Dropdown, DropdownItem, Input } from "src/shared/ui";
+import { useUnit } from 'effector-react';
+import { useForm } from 'effector-forms';
+import cls from 'classnames';
+import { $filteredOrders, $paginationQuery } from 'src/entities/orders';
+import { Button, Dropdown, DropdownItem, Input } from 'src/shared/ui';
 
-import { usePagination } from "../hooks";
-import { pageSelected, pageForm } from "../model";
+import { usePagination } from '../hooks';
+import { pageSelected, pageForm } from '../model';
 
-import styles from "./Pagination.module.scss";
+import styles from './Pagination.module.scss';
 
 export const Pagination = () => {
   const { fields, isTouched, hasError, submit } = useForm(pageForm);
@@ -27,7 +27,7 @@ export const Pagination = () => {
   }
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       submit();
     }
   };
@@ -35,12 +35,9 @@ export const Pagination = () => {
   return (
     <div className={styles.pages}>
       {paginationRange.map((page, index) => {
-        if (typeof page === "string") {
+        if (typeof page === 'string') {
           return (
-            <div
-              className={cls(styles.pageItem, styles.dots)}
-              key={page + index}
-            >
+            <div className={cls(styles.pageItem, styles.dots)} key={page + index}>
               &#8230;
             </div>
           );
@@ -51,7 +48,7 @@ export const Pagination = () => {
             key={page}
             size="small"
             className={styles.pageItem}
-            theme={page === paginationQuery.page ? "blue" : "blueReverse"}
+            theme={page === paginationQuery.page ? 'blue' : 'blueReverse'}
             onClick={() => pageSelected(page)}
           >
             {page}
@@ -75,7 +72,7 @@ export const Pagination = () => {
                 placeholder="Номер страницы"
                 value={fields.page.value}
                 onChange={(e) => fields.page.onChange(e.target.value)}
-                hasError={isTouched && hasError("page")}
+                hasError={isTouched && hasError('page')}
               />
             </DropdownItem>
           </>

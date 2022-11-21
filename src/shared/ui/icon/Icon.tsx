@@ -40,4 +40,4 @@ type Props = {
 export const Icon = ({ name, width = 16, height = 16, ...props }: Props) => {
   const IconComponent = ICON_MAP[name];
   return <IconComponent width={width} height={height} {...props} />;
-}
+};

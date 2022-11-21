@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-import cls from "classnames";
-import { Icon } from "src/shared/ui";
-import { STATUSES_MAP } from "../constants";
+import { ReactNode } from 'react';
+import cls from 'classnames';
+import { Icon } from 'src/shared/ui';
+import { STATUSES_MAP } from '../constants';
 
-import styles from "./OrderStatus.module.scss";
+import styles from './OrderStatus.module.scss';
 
 const ICON_MAP: Record<keyof typeof STATUSES_MAP, ReactNode> = {
   new: <Icon name="dot" className={styles.icon} />,
@@ -23,12 +23,12 @@ export const OrderStatus = ({ status }: Props) => {
   return (
     <div
       className={cls(styles.status, {
-        [styles.new]: status === "new",
-        [styles.postponed]: status === "postponed",
-        [styles.confirmed]: status === "confirmed",
-        [styles.calculation]: status === "calculation",
-        [styles.completed]: status === "completed",
-        [styles.declined]: status === "declined",
+        [styles.new]: status === 'new',
+        [styles.postponed]: status === 'postponed',
+        [styles.confirmed]: status === 'confirmed',
+        [styles.calculation]: status === 'calculation',
+        [styles.completed]: status === 'completed',
+        [styles.declined]: status === 'declined',
       })}
     >
       {icon}
@@ -36,4 +36,3 @@ export const OrderStatus = ({ status }: Props) => {
     </div>
   );
 };
-

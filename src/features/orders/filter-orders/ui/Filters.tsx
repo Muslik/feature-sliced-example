@@ -1,8 +1,8 @@
-import { useForm } from "effector-forms";
-import { STATUSES_MAP } from "src/entities/orders";
-import { Button, Input, Select } from "src/shared/ui";
-import { filtersForm } from "../model";
-import styles from "./Filters.module.scss";
+import { useForm } from 'effector-forms';
+import { STATUSES_MAP } from 'src/entities/orders';
+import { Button, Input, Select } from 'src/shared/ui';
+import { filtersForm } from '../model';
+import styles from './Filters.module.scss';
 
 const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
   value: status,
@@ -12,7 +12,7 @@ const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
 export const Filters = () => {
   const { fields, submit } = useForm(filtersForm);
 
-  console.log("F", fields.statuses.value);
+  console.log('F', fields.statuses.value);
 
   const handleChangeStatuses = (status: string) => {
     const newStatuses = fields.statuses.value.includes(status)

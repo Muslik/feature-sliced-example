@@ -1,5 +1,5 @@
 export const parseInputToDate = (date: string) => {
-  const [day, month, year] = date.split(".");
+  const [day, month, year] = date.split('.');
   return Date.parse(`${year}-${month}-${day}`);
 };
 
@@ -20,4 +20,3 @@ export const formatDate = (date: string) => {
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
   return `${formattedDay}.${formattedMonth}.${year}, ${formattedHours}:${formattedMinutes}`;
 };
-

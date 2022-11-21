@@ -1,2 +1,2 @@
 import './model';
-export { Searchbar } from './ui/Searchbar'
+export { Searchbar } from './ui/Searchbar';

@@ -1,11 +1,11 @@
-import { createForm } from "effector-forms";
-import { debounce } from "patronum";
-import { createEvent, createStore, sample } from "effector";
-import { setFiltersQuery } from "src/entities/orders";
+import { createForm } from 'effector-forms';
+import { debounce } from 'patronum';
+import { createEvent, createStore, sample } from 'effector';
+import { setFiltersQuery } from 'src/entities/orders';
 
 const DEBOUNCE_TIME = 300;
 
-export const $search = createStore("");
+export const $search = createStore('');
 
 export const searchChanged = createEvent<string>();
 
@@ -25,19 +25,19 @@ sample({
 export const filtersForm = createForm({
   fields: {
     dateFrom: {
-      init: "",
+      init: '',
     },
     dateTo: {
-      init: "",
+      init: '',
     },
     statuses: {
       init: [] as string[],
     },
     priceFrom: {
-      init: "",
+      init: '',
     },
     priceTo: {
-      init: "",
+      init: '',
     },
   },
 });

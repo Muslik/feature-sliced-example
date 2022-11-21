@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import cls from "classnames";
-import { Icon } from "../icon/Icon";
-import styles from "./TableHeaderCell.module.scss";
+import { ReactNode } from 'react';
+import cls from 'classnames';
+import { Icon } from '../icon/Icon';
+import styles from './TableHeaderCell.module.scss';
 
 type Props = {
   isActive?: boolean;
-  direction?: "asc" | "desc";
+  direction?: 'asc' | 'desc';
   onSort?: () => void;
   children: ReactNode;
   className?: string;
@@ -30,7 +30,7 @@ export const TableHeaderCell = ({
         <Icon
           name="varrow"
           className={cls(styles.icon, {
-            [styles.iconReversed]: direction === "asc",
+            [styles.iconReversed]: direction === 'asc',
           })}
         />
       )}

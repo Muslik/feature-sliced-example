@@ -1,22 +1,22 @@
-import { ReactNode, useEffect } from "react";
-import cls from "classnames";
-import styles from "./Modal.module.scss";
+import { ReactNode, useEffect } from 'react';
+import cls from 'classnames';
+import styles from './Modal.module.scss';
 
 type Props = {
   isOpen: boolean;
   children: ReactNode;
   fullHeight?: boolean;
-  position?: "right" | "center";
+  position?: 'right' | 'center';
 };
 
-export const Modal = ({ isOpen, fullHeight, position = "right", children }: Props) => {
+export const Modal = ({ isOpen, fullHeight, position = 'right', children }: Props) => {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -25,8 +25,8 @@ export const Modal = ({ isOpen, fullHeight, position = "right", children }: Prop
       <div
         className={cls(styles.modalContent, {
           [styles.fullHeight]: fullHeight,
-          [styles.positionRight]: position === "right",
-          [styles.positionCenter]: position === "center",
+          [styles.positionRight]: position === 'right',
+          [styles.positionCenter]: position === 'center',
         })}
       >
         {children}
@@ -35,4 +35,3 @@ export const Modal = ({ isOpen, fullHeight, position = "right", children }: Prop
     </>
   );
 };
-

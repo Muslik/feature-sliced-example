@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -14,21 +15,21 @@ body {
 }
 
 :root {
-  --blue: #459DF5;
-  --green: #0FB864;
-  --orange: #FF8C56;
-  --red: #F53152;
+  --blue: #459df5;
+  --green: #0fb864;
+  --orange: #ff8c56;
+  --red: #f53152;
   --black: #000;
   --white: #fff;
-  --light-blue: #BAD8F5;
-  --white-blue: #EBF0F5;
+  --light-blue: #bad8f5;
+  --white-blue: #ebf0f5;
   --shade: rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="dark"] {
-  --black: #BCC4CC;
-  --white: #2B2D33;
-  --light-blue: #454E52;
-  --white-blue: #171B1F;
+[data-theme='dark'] {
+  --black: #bcc4cc;
+  --white: #2b2d33;
+  --light-blue: #454e52;
+  --white-blue: #171b1f;
   --shade: rgba(0, 0, 0, 0.3);
 }

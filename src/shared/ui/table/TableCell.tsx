@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import cls from "classnames";
-import styles from "./TableCell.module.scss";
+import { ReactNode } from 'react';
+import cls from 'classnames';
+import styles from './TableCell.module.scss';
 
 type Props = { children: ReactNode } & React.HTMLAttributes<HTMLDivElement>;
 
@@ -11,4 +11,3 @@ export const TableCell = ({ children, className, ...props }: Props) => {
     </div>
   );
 };
-

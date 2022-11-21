@@ -6,16 +6,16 @@ import {
   useRef,
   ChangeEvent,
   forwardRef,
-} from "react";
-import cls from "classnames";
-import { useMergedRef } from "../../lib";
-import { Icon } from "../";
+} from 'react';
+import cls from 'classnames';
+import { useMergedRef } from '../../lib';
+import { Icon } from '../';
 
-import styles from "./Input.module.scss";
+import styles from './Input.module.scss';
 
 const composeEventHandlers = <T extends SyntheticEvent>(
   firstEventHandler: (event: T) => void,
-  secondEventHandler?: (event: T) => void
+  secondEventHandler?: (event: T) => void,
 ) => {
   return (event: T): void => {
     if (secondEventHandler) {
@@ -30,7 +30,7 @@ type Props = {
   postfix?: ReactNode;
   prefix?: ReactNode;
   allowClear?: boolean;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix">;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>;
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
@@ -47,7 +47,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
       value,
       ...props
     }: Props,
-    ref
+    ref,
   ) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const multiRef = useMergedRef(inputRef, ref);
@@ -69,16 +69,14 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         return;
       }
       if (inputRef.current) {
-        const currentTarget = inputRef.current.cloneNode(
-          true
-        ) as HTMLInputElement;
+        const currentTarget = inputRef.current.cloneNode(true) as HTMLInputElement;
 
         const newEvent: ChangeEvent<HTMLInputElement> = Object.create(event, {
           target: { value: currentTarget },
           currentTarget: { value: currentTarget },
         });
 
-        currentTarget.value = "";
+        currentTarget.value = '';
         onChange(newEvent);
       }
     };
@@ -119,5 +117,5 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         {hasPostfix && <div className={styles.postfix}>{getPostfix()}</div>}
       </div>
     );
-  }
+  },
 );

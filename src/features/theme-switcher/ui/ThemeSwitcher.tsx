@@ -1,14 +1,14 @@
-import { Dropdown, Button, DropdownItem } from "src/shared/ui";
-import { useThemeSwitcher } from "../lib";
+import { Dropdown, Button, DropdownItem } from 'src/shared/ui';
+import { useThemeSwitcher } from '../lib';
 
 const THEME_MAPPING = {
-  dark: "Темная тема",
-  light: "Светлая тема",
+  dark: 'Темная тема',
+  light: 'Светлая тема',
 };
 
 const THEME_ICONS = {
-  dark: "moon",
-  light: "sun",
+  dark: 'moon',
+  light: 'sun',
 } as const;
 
 export const ThemeSwitcher = () => {
@@ -30,18 +30,13 @@ export const ThemeSwitcher = () => {
               size="small"
               withFullWidth={true}
               theme="blueReverse"
-              onClick={() => setTheme("light")}
+              onClick={() => setTheme('light')}
             >
               Светлая
             </Button>
           </DropdownItem>
           <DropdownItem>
-            <Button
-              size="small"
-              icon="moon"
-              withFullWidth={true}
-              onClick={() => setTheme("dark")}
-            >
+            <Button size="small" icon="moon" withFullWidth={true} onClick={() => setTheme('dark')}>
               Темная
             </Button>
           </DropdownItem>

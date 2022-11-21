@@ -1,5 +1,5 @@
-import { useThemeSwitcher } from "src/features/theme-switcher";
-import { Pages } from "src/pages";
+import { useThemeSwitcher } from 'src/features/theme-switcher';
+import { Pages } from 'src/pages';
 
 function App() {
   useThemeSwitcher();

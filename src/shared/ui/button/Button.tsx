@@ -1,28 +1,20 @@
-import cls from "classnames";
-import { forwardRef } from "react";
-import { Icon, IconName } from "src/shared/ui";
+import cls from 'classnames';
+import { forwardRef } from 'react';
+import { Icon, IconName } from 'src/shared/ui';
 
-import styles from "./Button.module.scss";
+import styles from './Button.module.scss';
 
 type Props = {
-  theme?: "blue" | "blueReverse" | "blackReverse" | "danger";
-  size?: "medium" | "small";
+  theme?: 'blue' | 'blueReverse' | 'blackReverse' | 'danger';
+  size?: 'medium' | 'small';
   icon?: IconName;
   withFullWidth?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = forwardRef<HTMLButtonElement, Props>(
   (
-    {
-      icon,
-      theme = "blue",
-      size = "medium",
-      children,
-      className,
-      withFullWidth,
-      ...props
-    }: Props,
-    ref
+    { icon, theme = 'blue', size = 'medium', children, className, withFullWidth, ...props }: Props,
+    ref,
   ) => {
     const buttonClass = cls(
       styles.button,
@@ -32,7 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         [styles.iconOnly]: icon && !children,
         [styles.withFullWidth]: withFullWidth,
       },
-      className
+      className,
     );
 
     return (
@@ -41,6 +33,5 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
         {children && <span className={styles.text}>{children}</span>}
       </button>
     );
-  }
+  },
 );
-

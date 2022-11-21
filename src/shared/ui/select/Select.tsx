@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 import cls from 'classnames';
-import { Icon, Input, Dropdown, LabelControl, Checkbox, Radio } from "../";
+import { Icon, Input, Dropdown, LabelControl, Checkbox, Radio } from '../';
 
-import styles from "./Select.module.scss";
+import styles from './Select.module.scss';
 
-const ANY = "Любой";
+const ANY = 'Любой';
 
 type Multiple = {
   multiple: true;
@@ -23,33 +23,22 @@ type Props = {
   className?: string;
 } & (Multiple | Single);
 
-export const Select = ({
-  onChange,
-  selected,
-  options,
-  multiple,
-  name,
-  className,
-}: Props) => {
+export const Select = ({ onChange, selected, options, multiple, name, className }: Props) => {
   if (!options) {
     return null;
   }
 
-  const handleChange = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     onChange(value);
   };
 
   const getDescription = () => {
     if (!multiple) {
-      return options.find((option) => option.value === selected)?.label ?? "";
+      return options.find((option) => option.value === selected)?.label ?? '';
     }
 
     const areNonSelected = selected.length === 0;
-    const areAllSelected = options.every((option) =>
-      selected.includes(option.value)
-    );
+    const areAllSelected = options.every((option) => selected.includes(option.value));
     if (areNonSelected || areAllSelected) {
       return ANY;
     }
@@ -57,7 +46,7 @@ export const Select = ({
     return options
       .filter((option) => selected.includes(option.value))
       .map((option) => option.label)
-      .join(", ");
+      .join(', ');
   };
 
   const getMultipleOptions = () =>

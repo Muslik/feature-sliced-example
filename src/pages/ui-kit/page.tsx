@@ -1,36 +1,28 @@
-import { useState } from "react";
-import cls from "classnames";
-import {
-  Button,
-  Checkbox,
-  Radio,
-  Input,
-  Modal,
-  Dropdown,
-  Select,
-} from "src/shared/ui";
+import { useState } from 'react';
+import cls from 'classnames';
+import { Button, Checkbox, Radio, Input, Modal, Dropdown, Select } from 'src/shared/ui';
 
-import styles from "./UiKit.module.scss";
+import styles from './UiKit.module.scss';
 
 const options = [
   {
-    value: "new",
-    label: "Новый",
+    value: 'new',
+    label: 'Новый',
   },
   {
-    value: "in_progress",
-    label: "В работе",
+    value: 'in_progress',
+    label: 'В работе',
   },
   {
-    value: "done",
-    label: "Выполнен",
+    value: 'done',
+    label: 'Выполнен',
   },
 ];
 
 export const UiKitPage = () => {
-  const [inputState, setInputState] = useState("08.09.2016");
+  const [inputState, setInputState] = useState('08.09.2016');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selected, setSelected] = useState("new");
+  const [selected, setSelected] = useState('new');
 
   const handleClickToggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -44,22 +36,13 @@ export const UiKitPage = () => {
     <div>
       <div className={styles.box}>
         <Button onClick={handleClickToggleModal}>Открыть модалку</Button>
-        <Modal
-          isOpen={isModalOpen}
-          position="right"
-          fullHeight={true}
-        >
+        <Modal isOpen={isModalOpen} position="right" fullHeight={true}>
           <button onClick={handleClickToggleModal}>Закрыть</button>
           Hello World
         </Modal>
       </div>
       <div className={styles.box}>
-        <Select
-          options={options}
-          selected={selected}
-          onChange={handleChangeSelect}
-          name="status"
-        />
+        <Select options={options} selected={selected} onChange={handleChangeSelect} name="status" />
       </div>
       <div className={styles.box}>
         <Dropdown
@@ -96,7 +79,7 @@ export const UiKitPage = () => {
           <div className={styles.labelText}>Дата и время заказа</div>
           <Input
             prefix="до"
-            style={{ width: "256px" }}
+            style={{ width: '256px' }}
             placeholder="Введите"
             className={styles.input}
           />
@@ -105,7 +88,7 @@ export const UiKitPage = () => {
           <div className={styles.labelText}>Дата и время заказа</div>
           <Input
             prefix="c"
-            style={{ width: "256px" }}
+            style={{ width: '256px' }}
             value={inputState}
             onChange={(e) => setInputState(e.target.value)}
             placeholder="Введите"
@@ -117,7 +100,7 @@ export const UiKitPage = () => {
         <label className={styles.inputLabel}>
           <div className={styles.labelText}>Дата и время заказа</div>
           <Input
-            style={{ width: "256px" }}
+            style={{ width: '256px' }}
             defaultValue="06.12.2021"
             placeholder="Введите"
             className={styles.input}

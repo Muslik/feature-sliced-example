@@ -1,7 +1,7 @@
-import cls from "classnames";
-import { LabelHTMLAttributes, ReactNode } from "react";
+import cls from 'classnames';
+import { LabelHTMLAttributes, ReactNode } from 'react';
 
-import styles from "./LabelControl.module.scss";
+import styles from './LabelControl.module.scss';
 
 type Props = {
   control: ReactNode;
@@ -9,29 +9,12 @@ type Props = {
   hideToggle?: boolean;
 } & LabelHTMLAttributes<HTMLLabelElement>;
 
-export const LabelControl = ({
-  hideToggle,
-  className,
-  control,
-  label,
-  ...props
-}: Props) => {
+export const LabelControl = ({ hideToggle, className, control, label, ...props }: Props) => {
   return (
-    <label
-      className={cls(
-        styles.label,
-        { [styles.hideToggle]: hideToggle },
-        className
-      )}
-      {...props}
-    >
+    <label className={cls(styles.label, { [styles.hideToggle]: hideToggle }, className)} {...props}>
       {control}
       {label && (
-        <span
-          className={cls(styles.text, { [styles.textWithToggle]: !hideToggle })}
-        >
-          {label}
-        </span>
+        <span className={cls(styles.text, { [styles.textWithToggle]: !hideToggle })}>{label}</span>
       )}
     </label>
   );

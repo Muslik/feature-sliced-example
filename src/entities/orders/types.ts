@@ -7,16 +7,16 @@ export type Query = {
   priceTo: string;
 };
 
-export type SortField = "date" | "status" | "amount" | "sum"
+export type SortField = 'date' | 'status' | 'amount' | 'sum';
 
-export type SortDirection = "asc" | "desc"
+export type SortDirection = 'asc' | 'desc';
 
 export type SortParams = {
   field: SortField;
   direction: SortDirection;
-}
+};
 
 export type PaginationParams = {
   page: number;
   limit: number;
-}
+};

@@ -1,33 +1,27 @@
-import {
-  cloneElement,
-  MouseEvent,
-  ReactElement,
-  useRef,
-  useState,
-} from "react";
-import cls from "classnames";
-import { useClickOutside } from "src/shared/lib";
+import { cloneElement, MouseEvent, ReactElement, useRef, useState } from 'react';
+import cls from 'classnames';
+import { useClickOutside } from 'src/shared/lib';
 
-import styles from "./Dropdown.module.scss";
+import styles from './Dropdown.module.scss';
 
 type Props = {
   trigger: ReactElement;
   overlay: ReactElement;
-  position?: "top" | "bottom";
+  position?: 'top' | 'bottom';
   className?: string;
   shouldCloseOnClick?: boolean;
 };
 
-const targetTags = ["button"];
-const targetTypes = ["radio"];
+const targetTags = ['button'];
+const targetTypes = ['radio'];
 
 const POSITION_STYLES = {
-  bottom: "top",
-  top: "bottom",
+  bottom: 'top',
+  top: 'bottom',
 };
 
 export const Dropdown = ({
-  position = "bottom",
+  position = 'bottom',
   className,
   trigger,
   overlay,
@@ -48,7 +42,7 @@ export const Dropdown = ({
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!shouldCloseOnClick) {
-      return ;
+      return;
     }
     const target = event.target as HTMLInputElement;
     // Закрываем если кликнули по кнопке или radio

@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const Table = ({ children }: Props) => {
-  return <div className={styles.table}>{children}</div>
-}
+  return <div className={styles.table}>{children}</div>;
+};
