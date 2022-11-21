@@ -45,7 +45,7 @@ export const $areAllOrdersSelected = combine(
   $paginatedOrders,
   $selectedOrders,
   (orders, selected) => {
-    return orders.length === selected.length;
+    return orders.length > 0 && orders.length === selected.length;
   },
 );
 

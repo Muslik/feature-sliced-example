@@ -12,8 +12,6 @@ const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
 export const Filters = () => {
   const { fields, submit } = useForm(filtersForm);
 
-  console.log('F', fields.statuses.value);
-
   const handleChangeStatuses = (status: string) => {
     const newStatuses = fields.statuses.value.includes(status)
       ? fields.statuses.value.filter((s) => s !== status)
