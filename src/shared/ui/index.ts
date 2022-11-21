@@ -1,4 +1,5 @@
 export { Button } from './button/Button';
+export type { Props as ButtonProps } from './button/Button';
 export { Icon } from './icon/Icon';
 export type { IconName } from './icon/Icon';
 export { Checkbox } from './checkbox/Checkbox';

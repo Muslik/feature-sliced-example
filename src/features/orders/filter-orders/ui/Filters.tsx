@@ -1,5 +1,6 @@
 import { useForm } from 'effector-forms';
 import { STATUSES_MAP } from 'src/entities/orders';
+import { useMobile } from 'src/shared/lib';
 import { Button, Input, Select } from 'src/shared/ui';
 import { filtersForm } from '../model';
 import styles from './Filters.module.scss';
@@ -10,7 +11,8 @@ const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
 }));
 
 export const Filters = () => {
-  const { fields, submit } = useForm(filtersForm);
+  const isMobile = useMobile();
+  const { fields, submit, isDirty, reset } = useForm(filtersForm);
 
   const handleChangeStatuses = (status: string) => {
     const newStatuses = fields.statuses.value.includes(status)
@@ -49,6 +51,7 @@ export const Filters = () => {
         <label className={styles.label}>Статус заказа</label>
         <div className={styles.row}>
           <Select
+            className={styles.select}
             name="status"
             options={STATUSES}
             selected={fields.statuses.value}
@@ -82,9 +85,19 @@ export const Filters = () => {
         </div>
       </div>
       <div className={styles.formBlock}>
-        <Button theme="blueReverse" onClick={() => submit()}>
+        <Button theme="blueReverse" onClick={() => submit()} withFullWidth={isMobile}>
           Применить
         </Button>
+        {isMobile && isDirty && (
+          <Button
+            theme="blackReverse"
+            className={styles.button}
+            onClick={() => reset()}
+            withFullWidth={isMobile}
+          >
+            Сбросить фильтры
+          </Button>
+        )}
       </div>
     </div>
   );

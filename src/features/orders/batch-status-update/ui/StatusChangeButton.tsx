@@ -1,19 +1,19 @@
 import { STATUSES_MAP } from 'src/entities/orders';
-import { Button, Dropdown, LabelControl, Radio } from 'src/shared/ui';
+import { Button, ButtonProps, Dropdown, LabelControl, Radio } from 'src/shared/ui';
 
 import styles from './StatusChangeButton.module.scss';
 
 type Props = {
   onChange: (key: string) => void;
-};
+} & Omit<ButtonProps, 'onChange'>;
 
-export const StatusChangeButton = ({ onChange }: Props) => {
+export const StatusChangeButton = ({ onChange, ...props }: Props) => {
   return (
     <Dropdown
       position="top"
       className={styles.dropdown}
       trigger={
-        <Button size="small" theme="blue" icon="bin">
+        <Button size="small" theme="blue" icon="bin" {...props}>
           Изменить статус
         </Button>
       }

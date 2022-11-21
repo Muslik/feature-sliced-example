@@ -85,19 +85,17 @@ export const Select = ({ onChange, selected, options, multiple, name, className 
   const renderedOptions = multiple ? getMultipleOptions() : getOptions();
 
   return (
-    <div>
-      <Dropdown
-        trigger={
-          <Input
-            postfix={<Icon name="varrow" fill="var(--light-blue)" />}
-            readOnly
-            value={getDescription()}
-            className={cls(className)}
-          />
-        }
-        overlay={<>{renderedOptions}</>}
-        className={styles.overlay}
-      />
-    </div>
+    <Dropdown
+      trigger={
+        <Input
+          postfix={<Icon name="varrow" fill="var(--light-blue)" />}
+          readOnly
+          value={getDescription()}
+          className={cls(className)}
+        />
+      }
+      overlay={<>{renderedOptions}</>}
+      className={cls(styles.overlay, className)}
+    />
   );
 };

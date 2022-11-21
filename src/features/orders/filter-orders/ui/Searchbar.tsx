@@ -2,6 +2,7 @@ import { useUnit } from 'effector-react';
 import { useForm } from 'effector-forms';
 import cls from 'classnames';
 import { Button, Icon, Input } from 'src/shared/ui';
+import { useMobile } from 'src/shared/lib';
 import { fetchOrdersFx } from 'src/entities/orders';
 import { Filters } from './Filters';
 import { $isFiltersVisible, $search, searchChanged, toggleFilters, filtersForm } from '../model';
@@ -10,6 +11,7 @@ import styles from './Searchbar.module.scss';
 type Props = { className?: string };
 
 export const Searchbar = ({ className }: Props) => {
+  const isMobile = useMobile();
   const [search, searchChangedFn, isFiltersVisible, toggleFiltersFn, isOrdersLoading] = useUnit([
     $search,
     searchChanged,
@@ -35,10 +37,11 @@ export const Searchbar = ({ className }: Props) => {
           theme={isFiltersVisible ? 'blue' : 'blueReverse'}
           className={styles.button}
           onClick={() => toggleFiltersFn()}
+          icon="filter"
         >
-          Фильтры
+          {!isMobile ? 'Фильтры' : null}
         </Button>
-        {isDirty && (
+        {isDirty && !isMobile && (
           <Button theme="blueReverse" className={styles.button} onClick={() => reset()}>
             Сбросить фильтры
           </Button>

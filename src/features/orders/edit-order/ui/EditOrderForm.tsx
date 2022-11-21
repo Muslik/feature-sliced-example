@@ -76,7 +76,7 @@ export const EditOrderForm = () => {
   };
 
   return (
-    <Modal isOpen={true}>
+    <Modal isOpen={true} fullHeight={true} fullScreenOnMobile={true}>
       <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.title}>Заявка #{model.orderToEdit.orderNumber}</div>

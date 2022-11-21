@@ -1,16 +1,16 @@
-import { Button, Dropdown, DropdownItem } from 'src/shared/ui';
+import { Button, ButtonProps, Dropdown, DropdownItem } from 'src/shared/ui';
 
 type Props = {
   deleteCount: number;
   onDelete: () => void;
-};
+} & ButtonProps;
 
-export const DeleteButton = ({ onDelete, deleteCount }: Props) => {
+export const DeleteButton = ({ onDelete, deleteCount, ...props }: Props) => {
   return (
     <Dropdown
       position="top"
       trigger={
-        <Button size="small" theme="danger" icon="bin">
+        <Button size="small" theme="danger" icon="bin" {...props}>
           Удалить
         </Button>
       }

@@ -1,3 +1,4 @@
+import { useMobile } from 'src/shared/lib';
 import { Dropdown, Button, DropdownItem } from 'src/shared/ui';
 import { useThemeSwitcher } from '../lib';
 
@@ -12,15 +13,20 @@ const THEME_ICONS = {
 } as const;
 
 export const ThemeSwitcher = () => {
+  const isMobile = useMobile();
   const { theme, setTheme } = useThemeSwitcher();
+
+  const dropdownTrigger = isMobile ? (
+    <Button theme="blue" icon={THEME_ICONS[theme]} />
+  ) : (
+    <Button theme="blueReverse" icon={THEME_ICONS[theme]}>
+      {THEME_MAPPING[theme]}
+    </Button>
+  );
 
   return (
     <Dropdown
-      trigger={
-        <Button theme="blueReverse" icon={THEME_ICONS[theme]}>
-          {THEME_MAPPING[theme]}
-        </Button>
-      }
+      trigger={dropdownTrigger}
       overlay={
         <>
           <DropdownItem>Выберите тему</DropdownItem>

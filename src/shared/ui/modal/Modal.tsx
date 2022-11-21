@@ -1,5 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import cls from 'classnames';
+import { useMobile } from 'src/shared/lib';
+
 import styles from './Modal.module.scss';
 
 type Props = {
@@ -7,9 +9,17 @@ type Props = {
   children: ReactNode;
   fullHeight?: boolean;
   position?: 'right' | 'center';
+  fullScreenOnMobile?: boolean;
 };
 
-export const Modal = ({ isOpen, fullHeight, position = 'right', children }: Props) => {
+export const Modal = ({
+  isOpen,
+  fullHeight,
+  position = 'right',
+  children,
+  fullScreenOnMobile,
+}: Props) => {
+  const isMobile = useMobile();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,6 +37,7 @@ export const Modal = ({ isOpen, fullHeight, position = 'right', children }: Prop
           [styles.fullHeight]: fullHeight,
           [styles.positionRight]: position === 'right',
           [styles.positionCenter]: position === 'center',
+          [styles.fullScreen]: isMobile && fullScreenOnMobile,
         })}
       >
         {children}

@@ -4,7 +4,7 @@ import { Icon, IconName } from 'src/shared/ui';
 
 import styles from './Button.module.scss';
 
-type Props = {
+export type Props = {
   theme?: 'blue' | 'blueReverse' | 'blackReverse' | 'danger';
   size?: 'medium' | 'small';
   icon?: IconName;

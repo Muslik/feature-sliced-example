@@ -1,18 +1,21 @@
+@import 'src/shared/styles/mixins';
+
 .filters {
   display: flex;
   background: var(--white-blue);
   border-radius: 8px;
   padding: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+  @include mobile() {
+    flex-direction: column;
+  }
 }
 
 .formBlock {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-}
-
-.formBlock + .formBlock {
-  margin-left: 16px;
 }
 
 .label {
@@ -23,6 +26,15 @@
 
 .dateInput {
   width: 142px;
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.select {
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .dateInput + .dateInput {
