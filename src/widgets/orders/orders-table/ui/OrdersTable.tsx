@@ -16,7 +16,14 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'src/shared/ui';
-import { orderSelected, $selectedOrders, deleteConfirmed, statusChanged } from '../model';
+import {
+  orderSelected,
+  $selectedOrders,
+  deleteConfirmed,
+  statusChanged,
+  selectAllOrders,
+  $areAllOrdersSelected,
+} from '../model';
 
 import styles from './OrdersTable.module.scss';
 import { DeleteButton } from 'src/features/orders/delete-orders';
@@ -31,6 +38,8 @@ const INVERTED_SORT_DIRECTION = {
 
 export const OrdersTable = ({}: Props) => {
   const model = useUnit({
+    areAllOrdersSelected: $areAllOrdersSelected,
+    selectAllOrders: selectAllOrders,
     statusChanged: statusChanged,
     deleteConfirmed: deleteConfirmed,
     selectedOrders: $selectedOrders,
@@ -48,6 +57,14 @@ export const OrdersTable = ({}: Props) => {
   return (
     <Table>
       <TableHeader>
+        <TableHeaderCell className={styles.cellSelect}>
+          <label className={styles.selectLabel} onClick={(e) => e.stopPropagation()}>
+            <Checkbox
+              onChange={() => model.selectAllOrders()}
+              checked={model.areAllOrdersSelected}
+            />
+          </label>
+        </TableHeaderCell>
         <TableHeaderCell className={styles.cellOrderNumber}>#</TableHeaderCell>
         <TableHeaderCell
           isActive={model.sortQuery.field === 'date'}
