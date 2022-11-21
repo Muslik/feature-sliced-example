@@ -10,6 +10,7 @@ export {
   setPaginationQuery,
   $paginationQuery,
   deleteOrders,
+  ordersChanged,
 } from './model';
 export * from './constants';
 export { OrderStatus } from './ui/OrderStatus';

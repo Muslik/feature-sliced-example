@@ -16,10 +16,11 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'src/shared/ui';
-import { orderSelected, $selectedOrders, deleteConfirmed } from '../model';
+import { orderSelected, $selectedOrders, deleteConfirmed, statusChanged } from '../model';
 
 import styles from './OrdersTable.module.scss';
 import { DeleteButton } from 'src/features/orders/delete-orders';
+import { StatusChangeButton } from 'src/features/orders/batch-status-update';
 
 type Props = {};
 
@@ -30,6 +31,7 @@ const INVERTED_SORT_DIRECTION = {
 
 export const OrdersTable = ({}: Props) => {
   const model = useUnit({
+    statusChanged: statusChanged,
     deleteConfirmed: deleteConfirmed,
     selectedOrders: $selectedOrders,
     orderSelected: orderSelected,
@@ -113,13 +115,16 @@ export const OrdersTable = ({}: Props) => {
             <div className={styles.selectedCount}>
               Выбрано записей: {model.selectedOrders.length}
             </div>
+            <StatusChangeButton onChange={(status) => model.statusChanged(status)} />
             <DeleteButton
               deleteCount={model.selectedOrders.length}
               onDelete={() => deleteConfirmed()}
             />
           </div>
         )}
-        <Pagination />
+        <div className={styles.footerRight}>
+          <Pagination />
+        </div>
       </TableFooter>
     </Table>
   );

@@ -9,6 +9,8 @@ export const fetchOrdersFx = createEffect(api.fetchOrders);
 
 export const $orders = createStore<Order[]>([]);
 
+export const ordersChanged = createEvent<Partial<Order>[]>();
+
 export const orderChanged = createEvent<Partial<Order>>();
 
 export const deleteOrders = createEvent<string[]>();
@@ -17,6 +19,12 @@ $orders
   .on(fetchOrdersFx.doneData, (_, payload) => payload)
   .on(deleteOrders, (state, payload) => {
     return state.filter((order) => !payload.includes(order.id));
+  })
+  .on(ordersChanged, (state, payload) => {
+    return state.map((order) => {
+      const changedOrder = payload.find((o) => o.id === order.id);
+      return changedOrder ? { ...order, ...changedOrder } : order;
+    });
   })
   .on(orderChanged, (state, payload) => {
     return state.map((order) => {
