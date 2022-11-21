@@ -1,3 +1,13 @@
+.cellSelect {
+  padding: 0;
+}
+
+.selectLabel {
+  display: flex;
+  align-items: center;
+  padding: 12px 8px;
+}
+
 .cellOrderNumber {
   flex: 1;
 }
@@ -24,4 +34,20 @@
 
 .footer {
   justify-content: space-between;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  line-height: 16px;
+  gap: 16px;
+}
+
+.selectedCount {
+  color: var(--blue);
+}
+
+.rowSelected {
+  background: var(--white-blue);
 }

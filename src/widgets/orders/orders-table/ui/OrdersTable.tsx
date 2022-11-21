@@ -1,4 +1,5 @@
 import { useUnit } from 'effector-react';
+import cls from 'classnames';
 import { $paginatedOrders, $sortQuery, OrderStatus, SortField } from 'src/entities/orders';
 import { orderEdited } from 'src/features/orders/edit-order';
 import { sortApplied } from 'src/features/orders/sort-orders';
@@ -6,6 +7,7 @@ import { Pagination } from 'src/features/orders/paginate-orders';
 import { formatDate, formatMoney } from 'src/shared/lib';
 import {
   Button,
+  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -14,8 +16,10 @@ import {
   TableHeaderCell,
   TableRow,
 } from 'src/shared/ui';
+import { orderSelected, $selectedOrders, deleteConfirmed } from '../model';
 
 import styles from './OrdersTable.module.scss';
+import { DeleteButton } from 'src/features/orders/delete-orders';
 
 type Props = {};
 
@@ -26,6 +30,9 @@ const INVERTED_SORT_DIRECTION = {
 
 export const OrdersTable = ({}: Props) => {
   const model = useUnit({
+    deleteConfirmed: deleteConfirmed,
+    selectedOrders: $selectedOrders,
+    orderSelected: orderSelected,
     orders: $paginatedOrders,
     sortQuery: $sortQuery,
   });
@@ -76,7 +83,19 @@ export const OrdersTable = ({}: Props) => {
       </TableHeader>
       <TableBody>
         {model.orders.map(({ id, orderNumber, date, status, amount, sum, customer }) => (
-          <TableRow key={id} onClick={() => orderEdited(id)}>
+          <TableRow
+            key={id}
+            onClick={() => orderEdited(id)}
+            className={cls({ [styles.rowSelected]: model.selectedOrders.includes(id) })}
+          >
+            <TableCell className={styles.cellSelect}>
+              <label className={styles.selectLabel} onClick={(e) => e.stopPropagation()}>
+                <Checkbox
+                  onChange={() => model.orderSelected(id)}
+                  checked={model.selectedOrders.includes(id)}
+                />
+              </label>
+            </TableCell>
             <TableCell className={styles.cellOrderNumber}>{orderNumber}</TableCell>
             <TableCell className={styles.cellDate}>{formatDate(date)}</TableCell>
             <TableCell className={styles.cellStatus}>
@@ -89,9 +108,17 @@ export const OrdersTable = ({}: Props) => {
         ))}
       </TableBody>
       <TableFooter className={styles.footer}>
-        <Button size="small" theme="danger">
-          Delete
-        </Button>
+        {model.selectedOrders.length > 0 && (
+          <div className={styles.footerLeft}>
+            <div className={styles.selectedCount}>
+              Выбрано записей: {model.selectedOrders.length}
+            </div>
+            <DeleteButton
+              deleteCount={model.selectedOrders.length}
+              onDelete={() => deleteConfirmed()}
+            />
+          </div>
+        )}
         <Pagination />
       </TableFooter>
     </Table>

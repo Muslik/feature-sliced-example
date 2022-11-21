@@ -9,6 +9,7 @@ export {
   fetchOrdersFx,
   setPaginationQuery,
   $paginationQuery,
+  deleteOrders,
 } from './model';
 export * from './constants';
 export { OrderStatus } from './ui/OrderStatus';
