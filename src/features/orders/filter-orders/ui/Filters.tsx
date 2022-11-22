@@ -29,7 +29,7 @@ export const Filters = () => {
         </label>
         <div className={styles.row}>
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="с"
             id="dateFrom"
             allowClear={true}
@@ -38,7 +38,7 @@ export const Filters = () => {
             placeholder="dd.mm.yyyy"
           />
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="до"
             allowClear={true}
             value={fields.dateTo.value}
@@ -66,7 +66,7 @@ export const Filters = () => {
         </label>
         <div className={styles.row}>
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="от"
             id="priceFrom"
             allowClear={true}
@@ -75,7 +75,7 @@ export const Filters = () => {
             placeholder="₽"
           />
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="до"
             allowClear={true}
             value={fields.priceTo.value}
@@ -85,15 +85,14 @@ export const Filters = () => {
         </div>
       </div>
       <div className={styles.formBlock}>
-        <Button theme="blueReverse" onClick={() => submit()} withFullWidth={isMobile}>
+        <Button theme="blueReverse" onClick={() => submit()}>
           Применить
         </Button>
         {isMobile && isDirty && (
           <Button
-            theme="blackReverse"
+            theme="blueReverse"
             className={styles.button}
             onClick={() => reset()}
-            withFullWidth={isMobile}
           >
             Сбросить фильтры
           </Button>

@@ -7,13 +7,13 @@ type Props = {
   onChange: (key: string) => void;
 } & Omit<ButtonProps, 'onChange'>;
 
-export const StatusChangeButton = ({ onChange, ...props }: Props) => {
+export const StatusChangeButton = ({ onChange, className, ...props }: Props) => {
   return (
     <Dropdown
       position="top"
       className={styles.dropdown}
       trigger={
-        <Button size="small" theme="blue" icon="bin" {...props}>
+        <Button size="small" theme="blue" icon="pencil" {...props}>
           Изменить статус
         </Button>
       }

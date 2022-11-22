@@ -22,6 +22,7 @@
 
 .cellOrderNumber {
   flex: 1;
+  min-width: 45px;
 }
 
 .cellDate {
@@ -30,14 +31,17 @@
 
 .cellStatus {
   flex: 2;
+  min-width: 105px;
 }
 
 .cellAmount {
   flex: 1;
+  min-width: 73px;
 }
 
 .cellSum {
   flex: 1.5;
+  min-width: 66px;
 }
 
 .cellCustomer {
@@ -60,7 +64,8 @@
   gap: 16px;
   flex-wrap: wrap;
   @include mobile() {
-    jsutify-content: center;
+    justify-content: center;
+    gap: 8px;
   }
 }
 
@@ -72,9 +77,11 @@
 }
 
 .selectedCount {
-  width: 100%;
   color: var(--blue);
   text-align: center;
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .tableRow {
@@ -113,4 +120,24 @@
   position: absolute;
   right: 8px;
   top: 4px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 16px;
+  @include mobile() {
+    width: 100%;
+  }
+}
+
+.statusChangeButton {
+  @include mobile() {
+    width: 100%;
+  }
+}
+
+.deleteButton {
+  @include mobile() {
+    width: 100%;
+  }
 }
