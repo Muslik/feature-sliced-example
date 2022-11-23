@@ -170,7 +170,6 @@ export const OrdersTable = ({}: Props) => {
                 <StatusChangeButton
                   onChange={(status) => model.statusChanged(status)}
                   withFullWidth={isMobile}
-                  className={styles.statusChangeButton}
                 />
               </div>
               <div className={styles.deleteButton}>
