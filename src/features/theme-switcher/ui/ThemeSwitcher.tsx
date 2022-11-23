@@ -12,7 +12,9 @@ const THEME_ICONS = {
   light: 'sun',
 } as const;
 
-export const ThemeSwitcher = () => {
+type Props = { className?: string };
+
+export const ThemeSwitcher = ({ className }: Props) => {
   const isMobile = useMobile();
   const { theme, setTheme } = useThemeSwitcher();
 
@@ -26,6 +28,7 @@ export const ThemeSwitcher = () => {
 
   return (
     <Dropdown
+      className={className}
       trigger={dropdownTrigger}
       overlay={
         <>
