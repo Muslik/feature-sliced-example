@@ -3,6 +3,7 @@ import { STATUSES_MAP } from 'src/entities/orders';
 import { useMobile } from 'src/shared/lib';
 import { Button, Input, Select } from 'src/shared/ui';
 import { filtersForm } from '../model';
+import cls from 'classnames';
 import styles from './Filters.module.scss';
 
 const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
@@ -23,7 +24,7 @@ export const Filters = () => {
 
   return (
     <div className={styles.filters}>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockDate)}>
         <label className={styles.label} htmlFor="dateFrom">
           Дата оформления
         </label>
@@ -47,7 +48,7 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockStatus)}>
         <label className={styles.label}>Статус заказа</label>
         <div className={styles.row}>
           <Select
@@ -60,7 +61,7 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockPrice)}>
         <label className={styles.label} htmlFor="priceFrom">
           Сумма заказа
         </label>
@@ -84,7 +85,7 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockButton)}>
         <Button theme="blueReverse" onClick={() => submit()}>
           Применить
         </Button>

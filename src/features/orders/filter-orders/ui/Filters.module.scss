@@ -52,8 +52,8 @@
   width: 100%;
 }
 
-.formBlock:first-child {
-  width: 288px;
+.formBlockDate {
+  min-width: 288px;
   @include mobile {
     width: 100%;
     flex-direction: row;
@@ -64,8 +64,8 @@
   }
 }
 
-.formBlock:nth-child(2) {
-  width: 192px;
+.formBlockStatus {
+  min-width: 192px;
   @include mobile {
     width: 100%;
     flex-direction: row;
@@ -76,8 +76,8 @@
   }
 }
 
-.formBlock:nth-child(3) {
-  width: 256px;
+.formBlockPrice {
+  min-width: 256px;
   @include mobile {
     width: 100%;
     flex-direction: row;
@@ -88,7 +88,7 @@
   }
 }
 
-.formBlock:nth-child(4) {
+.formBlockButton {
   @include mobile {
     flex-direction: row;
     justify-content: center;
