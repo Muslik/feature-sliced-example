@@ -1,4 +1,21 @@
 .tableBody {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-track {
+  margin: 0.25rem 0;
+  width: 0.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  width: 0.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.34);
 }

@@ -11,7 +11,9 @@ export const OrdersPage = () => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Список заказов</h1>
-          <ThemeSwitcher />
+          <div>
+          <ThemeSwitcher className={styles.themeSwitcher}/>
+          </div>
         </div>
         <Searchbar className={styles.searchbar} />
         <OrdersTable />

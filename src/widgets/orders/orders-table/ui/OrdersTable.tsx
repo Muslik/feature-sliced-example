@@ -165,15 +165,21 @@ export const OrdersTable = ({}: Props) => {
             <div className={styles.selectedCount}>
               Выбрано записей: {model.selectedOrders.length}
             </div>
-            <StatusChangeButton
-              onChange={(status) => model.statusChanged(status)}
-              withFullWidth={isMobile}
-            />
-            <DeleteButton
-              withFullWidth={isMobile}
-              deleteCount={model.selectedOrders.length}
-              onDelete={() => deleteConfirmed()}
-            />
+            <div className={styles.buttonsWrapper}>
+              <div className={styles.statusChangeButton}>
+                <StatusChangeButton
+                  onChange={(status) => model.statusChanged(status)}
+                  withFullWidth={isMobile}
+                />
+              </div>
+              <div className={styles.deleteButton}>
+                <DeleteButton
+                  withFullWidth={isMobile}
+                  deleteCount={model.selectedOrders.length}
+                  onDelete={() => deleteConfirmed()}
+                />
+              </div>
+            </div>
           </div>
         )}
         <div className={styles.footerRight}>

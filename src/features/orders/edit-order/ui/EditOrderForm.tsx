@@ -45,13 +45,13 @@ export const EditOrderForm = () => {
   const hasUnsavedChangedClose = () => {
     if (model.hasUnsavedChanges) {
       return (
+        <div>
         <Dropdown
           trigger={<Button icon="xlarge" />}
           className={styles.dropdown}
           overlay={
             <>
-              <DropdownItem>Есть несохраненные изменения</DropdownItem>
-              <DropdownItem>
+              Есть несохраненные изменения
                 <Button
                   withFullWidth={true}
                   theme="blueReverse"
@@ -60,15 +60,13 @@ export const EditOrderForm = () => {
                 >
                   Сбросить
                 </Button>
-              </DropdownItem>
-              <DropdownItem>
                 <Button withFullWidth={true} theme="blue" size="small">
                   Остаться
                 </Button>
-              </DropdownItem>
             </>
           }
         />
+        </div>
       );
     }
 

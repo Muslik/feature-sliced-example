@@ -7,8 +7,10 @@
   padding: 16px;
   flex-wrap: wrap;
   gap: 16px;
-  @include mobile() {
+  @include mobile {
     flex-direction: column;
+    gap: 8px;
+    padding: 16px 8px 8px 8px;
   }
 }
 
@@ -16,19 +18,26 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  @include max-screen(450px) {
+    gap: 8px;
+  }
 }
 
 .label {
   display: block;
   margin-bottom: 8px;
   font-size: 13px;
+  @include mobile {
+    min-width: 120px;
+    margin-bottom: 0;
+  }
+  @include max-screen(450px) {
+    min-width: auto;
+  }
 }
 
-.dateInput {
-  width: 142px;
-  @include mobile {
-    width: 100%;
-  }
+.input {
+  width: 100%;
 }
 
 .select {
@@ -37,10 +46,51 @@
   }
 }
 
-.dateInput + .dateInput {
-  margin-left: 4px;
-}
-
 .row {
   display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.formBlockDate {
+  min-width: 288px;
+  @include mobile {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  @include max-screen(450px) {
+    flex-direction: column;
+  }
+}
+
+.formBlockStatus {
+  min-width: 192px;
+  @include mobile {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  @include max-screen(450px) {
+    flex-direction: column;
+  }
+}
+
+.formBlockPrice {
+  min-width: 256px;
+  @include mobile {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  @include max-screen(450px) {
+    flex-direction: column;
+  }
+}
+
+.formBlockButton {
+  @include mobile {
+    flex-direction: row;
+    justify-content: center;
+  }
 }

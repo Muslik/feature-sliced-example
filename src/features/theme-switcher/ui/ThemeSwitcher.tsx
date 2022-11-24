@@ -1,5 +1,5 @@
 import { useMobile } from 'src/shared/lib';
-import { Dropdown, Button, DropdownItem } from 'src/shared/ui';
+import { Dropdown, Button } from 'src/shared/ui';
 import { useThemeSwitcher } from '../lib';
 
 const THEME_MAPPING = {
@@ -12,7 +12,9 @@ const THEME_ICONS = {
   light: 'sun',
 } as const;
 
-export const ThemeSwitcher = () => {
+type Props = { className?: string };
+
+export const ThemeSwitcher = ({ className }: Props) => {
   const isMobile = useMobile();
   const { theme, setTheme } = useThemeSwitcher();
 
@@ -26,26 +28,23 @@ export const ThemeSwitcher = () => {
 
   return (
     <Dropdown
+      className={className}
       trigger={dropdownTrigger}
       overlay={
         <>
-          <DropdownItem>Выберите тему</DropdownItem>
-          <DropdownItem>
-            <Button
-              icon="sun"
-              size="small"
-              withFullWidth={true}
-              theme="blueReverse"
-              onClick={() => setTheme('light')}
-            >
-              Светлая
-            </Button>
-          </DropdownItem>
-          <DropdownItem>
-            <Button size="small" icon="moon" withFullWidth={true} onClick={() => setTheme('dark')}>
-              Темная
-            </Button>
-          </DropdownItem>
+          Выберите тему
+          <Button
+            icon="sun"
+            size="small"
+            withFullWidth={true}
+            theme="blueReverse"
+            onClick={() => setTheme('light')}
+          >
+            Светлая
+          </Button>
+          <Button size="small" icon="moon" withFullWidth={true} onClick={() => setTheme('dark')}>
+            Темная
+          </Button>
         </>
       }
     />

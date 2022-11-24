@@ -3,6 +3,7 @@ import { STATUSES_MAP } from 'src/entities/orders';
 import { useMobile } from 'src/shared/lib';
 import { Button, Input, Select } from 'src/shared/ui';
 import { filtersForm } from '../model';
+import cls from 'classnames';
 import styles from './Filters.module.scss';
 
 const STATUSES = Object.keys(STATUSES_MAP).map((status) => ({
@@ -23,13 +24,13 @@ export const Filters = () => {
 
   return (
     <div className={styles.filters}>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockDate)}>
         <label className={styles.label} htmlFor="dateFrom">
           Дата оформления
         </label>
         <div className={styles.row}>
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="с"
             id="dateFrom"
             allowClear={true}
@@ -38,7 +39,7 @@ export const Filters = () => {
             placeholder="dd.mm.yyyy"
           />
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="до"
             allowClear={true}
             value={fields.dateTo.value}
@@ -47,7 +48,7 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockStatus)}>
         <label className={styles.label}>Статус заказа</label>
         <div className={styles.row}>
           <Select
@@ -60,13 +61,13 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
+      <div className={cls(styles.formBlock, styles.formBlockPrice)}>
         <label className={styles.label} htmlFor="priceFrom">
           Сумма заказа
         </label>
         <div className={styles.row}>
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="от"
             id="priceFrom"
             allowClear={true}
@@ -75,7 +76,7 @@ export const Filters = () => {
             placeholder="₽"
           />
           <Input
-            className={styles.dateInput}
+            className={styles.input}
             prefix="до"
             allowClear={true}
             value={fields.priceTo.value}
@@ -84,16 +85,15 @@ export const Filters = () => {
           />
         </div>
       </div>
-      <div className={styles.formBlock}>
-        <Button theme="blueReverse" onClick={() => submit()} withFullWidth={isMobile}>
+      <div className={cls(styles.formBlock, styles.formBlockButton)}>
+        <Button theme="blueReverse" onClick={() => submit()}>
           Применить
         </Button>
         {isMobile && isDirty && (
           <Button
-            theme="blackReverse"
+            theme="blueReverse"
             className={styles.button}
             onClick={() => reset()}
-            withFullWidth={isMobile}
           >
             Сбросить фильтры
           </Button>

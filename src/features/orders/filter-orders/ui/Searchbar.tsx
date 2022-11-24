@@ -28,7 +28,7 @@ export const Searchbar = ({ className }: Props) => {
         <Input
           value={search}
           onChange={({ target: { value } }) => searchChangedFn(value)}
-          className={styles.search}
+          className={cls(styles.search, {[styles.searchLoading]: !isOrdersLoading})}
           prefix={<Icon stroke="var(--blue)" name="search" />}
           placeholder="Номер заказа или ФИО"
           allowClear={true}

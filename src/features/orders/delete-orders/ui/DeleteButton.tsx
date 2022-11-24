@@ -1,4 +1,4 @@
-import { Button, ButtonProps, Dropdown, DropdownItem } from 'src/shared/ui';
+import { Button, ButtonProps, Dropdown } from 'src/shared/ui';
 
 type Props = {
   deleteCount: number;
@@ -16,17 +16,13 @@ export const DeleteButton = ({ onDelete, deleteCount, ...props }: Props) => {
       }
       overlay={
         <>
-          <DropdownItem>Удалить {deleteCount} записей?</DropdownItem>
-          <DropdownItem>
-            <Button withFullWidth={true} size="small" theme="blueReverse" onClick={onDelete}>
-              Удалить
-            </Button>
-          </DropdownItem>
-          <DropdownItem>
-            <Button withFullWidth={true} size="small" theme="blue">
-              Отмена
-            </Button>
-          </DropdownItem>
+          Удалить {deleteCount} записей?
+          <Button withFullWidth={true} size="small" theme="blueReverse" onClick={onDelete}>
+            Удалить
+          </Button>
+          <Button withFullWidth={true} size="small" theme="blue">
+            Отмена
+          </Button>
         </>
       }
     />

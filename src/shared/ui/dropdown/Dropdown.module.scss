@@ -1,9 +1,13 @@
 .dropdown {
   position: relative;
+  width: 100%;
 }
 
 .overlay {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   box-sizing: border-box;
   font-size: 13px;
   padding: 16px;
